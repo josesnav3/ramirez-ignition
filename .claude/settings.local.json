@@ -1,8 +1,0 @@
-{
-  "permissions": {
-    "allow": [
-      "Bash(cmd.exe /c \"gh auth status 2>&1\")",
-      "Bash(powershell.exe -Command \"& ''C:\\\\Program Files\\\\GitHub CLI\\\\gh.exe'' api repos/josesnav3/ramirez-ignition/pages --method POST -f ''source[branch]=master'' -f ''source[path]=/'' -f ''build_type=legacy''\")"
-    ]
-  }
-}
