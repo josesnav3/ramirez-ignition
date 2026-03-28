@@ -510,18 +510,21 @@ img { display: block; width: 100%; }
 .car-swiper .swiper-slide {
   position: relative;
   overflow: hidden;
-  background: #111;
+  background-color: #111;
+  background-size: cover;
+  background-position: center;
 }
 
 .car-swiper .swiper-slide::before {
   content: '';
   position: absolute;
-  inset: -20px;
-  background-image: var(--slide-bg);
+  inset: -15px;
+  background-image: inherit;
   background-size: cover;
   background-position: center;
-  filter: blur(14px);
-  opacity: 0.55;
+  filter: blur(18px);
+  transform: scale(1.05);
+  opacity: 0.75;
   z-index: 0;
 }
 

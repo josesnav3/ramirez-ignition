@@ -98,7 +98,7 @@ document.querySelectorAll('.car-swiper').forEach(el => {
 /* ─── 8b. FONDO DIFUMINADO POR SLIDE ────────────── */
 document.querySelectorAll('.car-swiper .swiper-slide').forEach(slide => {
   const img = slide.querySelector('img');
-  if (img) slide.style.setProperty('--slide-bg', `url('${img.getAttribute('src')}')`);
+  if (img) slide.style.backgroundImage = `url('${img.getAttribute('src')}')`;
 });
 
 
