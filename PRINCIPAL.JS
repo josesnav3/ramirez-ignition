@@ -95,6 +95,13 @@ document.querySelectorAll('.car-swiper').forEach(el => {
 });
 
 
+/* ─── 8b. FONDO DIFUMINADO POR SLIDE ────────────── */
+document.querySelectorAll('.car-swiper .swiper-slide').forEach(slide => {
+  const img = slide.querySelector('img');
+  if (img) slide.style.setProperty('--slide-bg', `url('${img.getAttribute('src')}')`);
+});
+
+
 /* ─── 9. FILTROS ─────────────────────────────────── */
 const filterPills = document.querySelectorAll('.filter-pill');
 const searchInput = document.getElementById('searchInput');
