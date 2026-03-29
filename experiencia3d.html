@@ -461,14 +461,21 @@ const renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 renderer.setSize(window.innerWidth, window.innerHeight);
 renderer.toneMapping = THREE.ACESFilmicToneMapping;
-renderer.toneMappingExposure = 0.85;
+renderer.toneMappingExposure = 1.2;
 renderer.outputColorSpace = THREE.SRGBColorSpace;
 renderer.shadowMap.enabled = true;
 renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 
-const scene  = new THREE.Scene();
-scene.background = new THREE.Color('#0E0F11');
-scene.fog = new THREE.FogExp2('#0E0F11', 0.035);
+const scene = new THREE.Scene();
+
+// Cargar HDRI de estudio — ilumina el auto y sirve de fondo
+new RGBELoader()
+  .load('studio.hdr', (texture) => {
+    texture.mapping = THREE.EquirectangularReflectionMapping;
+    scene.background = texture;
+    scene.environment = texture;
+    scene.backgroundBlurriness = 0.3; // fondo ligeramente desenfocado
+  });
 
 const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 100);
 camera.position.set(4.5, 2, 6);
@@ -494,10 +501,7 @@ const bloom = new UnrealBloomPass(
 composer.addPass(bloom);
 
 /* ── LUCES ── */
-const ambient = new THREE.AmbientLight(0xffffff, 0.4);
-scene.add(ambient);
-
-const keyLight = new THREE.DirectionalLight(0xfff5e0, 2.5);
+const keyLight = new THREE.DirectionalLight(0xfff5e0, 1.5);
 keyLight.position.set(5, 8, 5);
 keyLight.castShadow = true;
 keyLight.shadow.mapSize.set(2048, 2048);
@@ -509,12 +513,8 @@ keyLight.shadow.camera.top = 10;
 keyLight.shadow.camera.bottom = -10;
 scene.add(keyLight);
 
-const fillLight = new THREE.DirectionalLight(0xc5a572, 1.0);
-fillLight.position.set(-5, 3, -5);
-scene.add(fillLight);
-
-const rimLight = new THREE.DirectionalLight(0x4a9ecc, 0.8);
-rimLight.position.set(0, 2, -8);
+const rimLight = new THREE.DirectionalLight(0xffffff, 0.6);
+rimLight.position.set(-5, 4, -5);
 scene.add(rimLight);
 
 /* ── SUELO REFLECTANTE ── */
