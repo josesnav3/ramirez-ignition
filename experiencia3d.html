@@ -123,6 +123,19 @@
       letter-spacing: 1px;
     }
 
+    /* ── LOADING PROGRESS ── */
+    #loadingProgress {
+      position: fixed;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 300;
+      font-size: 0.65rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
     .car-actions {
       display: flex;
       flex-direction: column;
@@ -347,7 +360,7 @@
   <div class="loader-bar-wrap">
     <div class="loader-bar" id="loaderBar"></div>
   </div>
-  <div class="loader-text">Cargando experiencia 3D...</div>
+  <div class="loader-text" id="loaderText">Cargando experiencia 3D...</div>
 </div>
 
 <!-- CANVAS -->
@@ -367,16 +380,16 @@
 <!-- SPECS -->
 <div class="specs-strip" id="specsStrip">
   <div class="spec-item">
-    <span class="spec-val" id="specPotencia">490 hp</span>
+    <span class="spec-val">450 hp</span>
     <span class="spec-key">Potencia</span>
   </div>
   <div class="spec-item">
-    <span class="spec-val" id="specMotor">4.5L V8</span>
-    <span class="spec-key">Motor</span>
+    <span class="spec-val">3.5L V6</span>
+    <span class="spec-key">EcoBoost</span>
   </div>
   <div class="spec-item">
-    <span class="spec-val" id="specKm">0 – 100</span>
-    <span class="spec-key">3.5 seg</span>
+    <span class="spec-val">4x4</span>
+    <span class="spec-key">Tracción</span>
   </div>
 </div>
 
@@ -406,7 +419,7 @@
   <div class="car-info-panel">
     <div class="car-title-block" id="carTitleBlock">
       <p class="car-tag">Experiencia 3D · Ramírez Ignition</p>
-      <h1 class="car-3d-name">Ferrari F40</h1>
+      <h1 class="car-3d-name">Ford F-150 Raptor</h1>
       <p class="car-3d-sub">Modelo interactivo · Arrastra para explorar</p>
     </div>
     <div class="car-actions" id="carActions">
@@ -575,35 +588,46 @@ gltfLoader.setDRACOLoader(dracoLoader);
 let carBodyMaterials = [];
 let carModel;
 
-// Modelo Ferrari F40 oficial de Three.js
 gltfLoader.load(
-  'https://threejs.org/examples/models/gltf/ferrari.glb',
+  'ford_f150_raptor/scene.gltf',
   (gltf) => {
     carModel = gltf.scene;
-    carModel.scale.set(1, 1, 1);
-    carModel.position.set(0, 0, 0);
+
+    // Centrar y escalar el modelo automáticamente
+    const box = new THREE.Box3().setFromObject(carModel);
+    const center = box.getCenter(new THREE.Vector3());
+    const size   = box.getSize(new THREE.Vector3());
+    const maxDim = Math.max(size.x, size.y, size.z);
+    const scale  = 4.5 / maxDim;
+    carModel.scale.setScalar(scale);
+    carModel.position.sub(center.multiplyScalar(scale));
+    carModel.position.y = 0;
+
     carModel.traverse(child => {
       if (child.isMesh) {
         child.castShadow = true;
         child.receiveShadow = true;
-        // Detectar materiales de carrocería (no vidrios ni ruedas)
-        if (child.material && child.material.color) {
-          const col = child.material.color;
-          const isBody = col.r > 0.3 || col.g < 0.2;
-          if (isBody && !child.name.toLowerCase().includes('glass')
-                     && !child.name.toLowerCase().includes('window')
-                     && !child.name.toLowerCase().includes('wheel')
-                     && !child.name.toLowerCase().includes('tire')) {
-            child.material = child.material.clone();
-            child.material.color.set('#C5A572');
-            child.material.metalness = 0.9;
-            child.material.roughness = 0.15;
-            carBodyMaterials.push(child.material);
-          }
+        // Recopilar materiales de carrocería para cambio de color
+        const name = (child.name + (child.material?.name || '')).toLowerCase();
+        const isGlass = name.includes('glass') || name.includes('window') || name.includes('wind');
+        const isWheel = name.includes('wheel') || name.includes('tire') || name.includes('tyre') || name.includes('goma');
+        const isChrome = name.includes('chrome') || name.includes('crome');
+        if (!isGlass && !isWheel && !isChrome && child.material) {
+          const mats = Array.isArray(child.material) ? child.material : [child.material];
+          mats.forEach(mat => {
+            if (mat.color && !carBodyMaterials.includes(mat)) {
+              carBodyMaterials.push(mat);
+            }
+          });
         }
       }
     });
+
     scene.add(carModel);
+  },
+  (xhr) => {
+    const pct = Math.round((xhr.loaded / xhr.total) * 90);
+    loaderBar.style.width = pct + '%';
   }
 );
 
