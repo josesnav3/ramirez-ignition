@@ -252,8 +252,8 @@ img { display: block; width: 100%; }
   width: auto;
   min-width: 480px;
   object-fit: cover;
-  opacity: 0.55;
-  filter: saturate(0.7) contrast(1.05);
+  opacity: 0.85;
+  filter: saturate(0.85) contrast(1.05);
   flex-shrink: 0;
 }
 
