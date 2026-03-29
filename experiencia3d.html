@@ -1,0 +1,655 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Experiencia 3D — Ramírez Ignition</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=Corinthia:wght@700&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --gold: #C5A572;
+      --gold2: #9F8356;
+      --dark: #0E0F11;
+      --dark2: #121317;
+      --txt: #E8E6E1;
+      --muted: #7A7875;
+    }
+
+    html, body {
+      width: 100%; height: 100%;
+      background: var(--dark);
+      color: var(--txt);
+      font-family: Inter, sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* ── CANVAS 3D ── */
+    #canvas-3d {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+    }
+
+    /* ── NAVBAR ── */
+    .nav3d {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.2rem 2.5rem;
+      background: linear-gradient(to bottom, rgba(14,15,17,0.85) 0%, transparent 100%);
+    }
+
+    .nav3d-brand {
+      font-family: "Corinthia", cursive;
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--gold);
+      text-decoration: none;
+      letter-spacing: 1px;
+    }
+
+    .nav3d-back {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      transition: color 0.3s;
+    }
+    .nav3d-back:hover { color: var(--gold); }
+    .nav3d-back svg { width: 16px; height: 16px; }
+
+    /* ── OVERLAY UI ── */
+    .ui-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 10;
+      pointer-events: none;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 0 2.5rem 3rem;
+    }
+
+    .car-info-panel {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      pointer-events: auto;
+    }
+
+    .car-title-block {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    .car-title-block.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .car-tag {
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.4rem;
+    }
+
+    .car-3d-name {
+      font-size: clamp(2rem, 5vw, 4rem);
+      font-weight: 800;
+      line-height: 1;
+      color: var(--txt);
+    }
+
+    .car-3d-sub {
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-top: 0.5rem;
+      font-weight: 300;
+      letter-spacing: 1px;
+    }
+
+    .car-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      align-items: flex-end;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s ease 0.2s, transform 0.8s ease 0.2s;
+    }
+    .car-actions.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .btn-3d {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.7rem 1.8rem;
+      border-radius: 50px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      text-decoration: none;
+      cursor: pointer;
+      border: none;
+      transition: all 0.3s ease;
+    }
+
+    .btn-3d-primary {
+      background: var(--gold);
+      color: #0E0F11;
+    }
+    .btn-3d-primary:hover {
+      background: #d4b882;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(197,165,114,0.4);
+    }
+
+    .btn-3d-outline {
+      background: transparent;
+      color: var(--txt);
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+    .btn-3d-outline:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+      transform: translateY(-2px);
+    }
+
+    /* ── HINT INTERACCION ── */
+    .hint {
+      position: fixed;
+      bottom: 50%;
+      left: 50%;
+      transform: translate(-50%, 50%);
+      z-index: 10;
+      text-align: center;
+      pointer-events: none;
+      opacity: 1;
+      transition: opacity 1s ease;
+    }
+    .hint.hidden { opacity: 0; }
+
+    .hint-icon {
+      width: 48px;
+      height: 48px;
+      border: 2px solid rgba(197,165,114,0.5);
+      border-radius: 50%;
+      margin: 0 auto 0.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: pulse3d 2s infinite;
+    }
+    .hint-icon svg { width: 20px; height: 20px; color: var(--gold); }
+
+    .hint-text {
+      font-size: 0.65rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    @keyframes pulse3d {
+      0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(197,165,114,0.3); }
+      50% { transform: scale(1.05); box-shadow: 0 0 0 12px rgba(197,165,114,0); }
+    }
+
+    /* ── COLOR PICKER ── */
+    .color-picker {
+      position: fixed;
+      right: 2.5rem;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 20;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      opacity: 0;
+      transition: opacity 0.8s ease 0.4s;
+    }
+    .color-picker.visible { opacity: 1; }
+
+    .color-label {
+      font-size: 0.55rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--muted);
+      writing-mode: vertical-rl;
+      text-orientation: mixed;
+      transform: rotate(180deg);
+      margin-bottom: 0.5rem;
+      align-self: center;
+    }
+
+    .color-dot {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      border: 2px solid transparent;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .color-dot:hover, .color-dot.active {
+      border-color: #fff;
+      transform: scale(1.2);
+    }
+
+    /* ── LOADER ── */
+    #loader {
+      position: fixed;
+      inset: 0;
+      z-index: 200;
+      background: var(--dark);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1.5rem;
+      transition: opacity 0.8s ease;
+    }
+    #loader.done { opacity: 0; pointer-events: none; }
+
+    .loader-brand {
+      font-family: "Corinthia", cursive;
+      font-size: 3rem;
+      font-weight: 700;
+      color: var(--gold);
+    }
+
+    .loader-bar-wrap {
+      width: 200px;
+      height: 2px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+    .loader-bar {
+      height: 100%;
+      background: linear-gradient(90deg, var(--gold2), var(--gold));
+      border-radius: 2px;
+      width: 0%;
+      transition: width 0.1s linear;
+    }
+
+    .loader-text {
+      font-size: 0.65rem;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* ── SPECS PANEL ── */
+    .specs-strip {
+      position: fixed;
+      top: 50%;
+      left: 2.5rem;
+      transform: translateY(-50%);
+      z-index: 20;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      opacity: 0;
+      transition: opacity 0.8s ease 0.3s;
+    }
+    .specs-strip.visible { opacity: 1; }
+
+    .spec-item {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .spec-val {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--txt);
+    }
+    .spec-key {
+      font-size: 0.55rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .color-picker, .specs-strip { display: none; }
+      .nav3d { padding: 1rem 1.25rem; }
+      .ui-overlay { padding: 0 1.25rem 2rem; }
+      .car-3d-name { font-size: 2rem; }
+      .car-actions { flex-direction: row; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- LOADER -->
+<div id="loader">
+  <div class="loader-brand">Ramírez Inition</div>
+  <div class="loader-bar-wrap">
+    <div class="loader-bar" id="loaderBar"></div>
+  </div>
+  <div class="loader-text">Cargando experiencia 3D...</div>
+</div>
+
+<!-- CANVAS -->
+<canvas id="canvas-3d"></canvas>
+
+<!-- NAVBAR -->
+<nav class="nav3d">
+  <a href="index.html" class="nav3d-brand">Ramírez Inition</a>
+  <a href="index.html" class="nav3d-back">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="M19 12H5M12 5l-7 7 7 7"/>
+    </svg>
+    Volver al showroom
+  </a>
+</nav>
+
+<!-- SPECS -->
+<div class="specs-strip" id="specsStrip">
+  <div class="spec-item">
+    <span class="spec-val" id="specPotencia">490 hp</span>
+    <span class="spec-key">Potencia</span>
+  </div>
+  <div class="spec-item">
+    <span class="spec-val" id="specMotor">4.5L V8</span>
+    <span class="spec-key">Motor</span>
+  </div>
+  <div class="spec-item">
+    <span class="spec-val" id="specKm">0 – 100</span>
+    <span class="spec-key">3.5 seg</span>
+  </div>
+</div>
+
+<!-- COLOR PICKER -->
+<div class="color-picker" id="colorPicker">
+  <span class="color-label">Color</span>
+  <div class="color-dot active" data-color="#C5A572" style="background:#C5A572" title="Dorado"></div>
+  <div class="color-dot" data-color="#ffffff" style="background:#ffffff" title="Blanco"></div>
+  <div class="color-dot" data-color="#1a1a2e" style="background:#1a1a2e" title="Azul noche"></div>
+  <div class="color-dot" data-color="#C0392B" style="background:#C0392B" title="Rojo"></div>
+  <div class="color-dot" data-color="#1b4332" style="background:#1b4332" title="Verde"></div>
+  <div class="color-dot" data-color="#111111" style="background:#111111" title="Negro"></div>
+</div>
+
+<!-- HINT -->
+<div class="hint" id="hint">
+  <div class="hint-icon">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="M7 10l5-6 5 6M7 14l5 6 5-6"/>
+    </svg>
+  </div>
+  <p class="hint-text">Arrastra para rotar</p>
+</div>
+
+<!-- UI OVERLAY -->
+<div class="ui-overlay">
+  <div class="car-info-panel">
+    <div class="car-title-block" id="carTitleBlock">
+      <p class="car-tag">Experiencia 3D · Ramírez Ignition</p>
+      <h1 class="car-3d-name">Ferrari F40</h1>
+      <p class="car-3d-sub">Modelo interactivo · Arrastra para explorar</p>
+    </div>
+    <div class="car-actions" id="carActions">
+      <a href="https://wa.me/70145424?text=Hola%2C+me+interesa+consultar+sobre+un+auto"
+         target="_blank" rel="noopener" class="btn-3d btn-3d-primary">
+        Consultar precio
+      </a>
+      <a href="index.html" class="btn-3d btn-3d-outline">
+        Ver colección
+      </a>
+    </div>
+  </div>
+</div>
+
+
+<!-- SCRIPTS THREE.JS -->
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+  }
+}
+</script>
+
+<script type="module">
+import * as THREE from 'three';
+import { GLTFLoader }     from 'three/addons/loaders/GLTFLoader.js';
+import { DRACOLoader }    from 'three/addons/loaders/DRACOLoader.js';
+import { OrbitControls }  from 'three/addons/controls/OrbitControls.js';
+import { RGBELoader }     from 'three/addons/loaders/RGBELoader.js';
+import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
+import { RenderPass }     from 'three/addons/postprocessing/RenderPass.js';
+import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
+
+/* ── SETUP ── */
+const canvas   = document.getElementById('canvas-3d');
+const renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+renderer.setSize(window.innerWidth, window.innerHeight);
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure = 0.85;
+renderer.outputColorSpace = THREE.SRGBColorSpace;
+renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+
+const scene  = new THREE.Scene();
+scene.background = new THREE.Color('#0E0F11');
+scene.fog = new THREE.FogExp2('#0E0F11', 0.035);
+
+const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 100);
+camera.position.set(4.5, 2, 6);
+
+/* ── CONTROLS ── */
+const controls = new OrbitControls(camera, renderer.domElement);
+controls.enableDamping = true;
+controls.dampingFactor = 0.05;
+controls.minDistance = 3;
+controls.maxDistance = 12;
+controls.maxPolarAngle = Math.PI / 2 - 0.05;
+controls.target.set(0, 0.5, 0);
+controls.autoRotate = true;
+controls.autoRotateSpeed = 1.2;
+
+/* ── POST PROCESSING ── */
+const composer = new EffectComposer(renderer);
+composer.addPass(new RenderPass(scene, camera));
+const bloom = new UnrealBloomPass(
+  new THREE.Vector2(window.innerWidth, window.innerHeight),
+  0.3, 0.4, 0.85
+);
+composer.addPass(bloom);
+
+/* ── LUCES ── */
+const ambient = new THREE.AmbientLight(0xffffff, 0.4);
+scene.add(ambient);
+
+const keyLight = new THREE.DirectionalLight(0xfff5e0, 2.5);
+keyLight.position.set(5, 8, 5);
+keyLight.castShadow = true;
+keyLight.shadow.mapSize.set(2048, 2048);
+keyLight.shadow.camera.near = 0.5;
+keyLight.shadow.camera.far = 50;
+keyLight.shadow.camera.left = -10;
+keyLight.shadow.camera.right = 10;
+keyLight.shadow.camera.top = 10;
+keyLight.shadow.camera.bottom = -10;
+scene.add(keyLight);
+
+const fillLight = new THREE.DirectionalLight(0xc5a572, 1.0);
+fillLight.position.set(-5, 3, -5);
+scene.add(fillLight);
+
+const rimLight = new THREE.DirectionalLight(0x4a9ecc, 0.8);
+rimLight.position.set(0, 2, -8);
+scene.add(rimLight);
+
+/* ── SUELO REFLECTANTE ── */
+const floorGeo = new THREE.PlaneGeometry(30, 30);
+const floorMat = new THREE.MeshStandardMaterial({
+  color: '#111214',
+  metalness: 0.6,
+  roughness: 0.3,
+});
+const floor = new THREE.Mesh(floorGeo, floorMat);
+floor.rotation.x = -Math.PI / 2;
+floor.position.y = -0.01;
+floor.receiveShadow = true;
+scene.add(floor);
+
+/* ── LINEAS DECORATIVAS DEL SUELO ── */
+for (let i = -10; i <= 10; i += 2) {
+  const lineGeo = new THREE.PlaneGeometry(0.02, 20);
+  const lineMat = new THREE.MeshBasicMaterial({ color: '#C5A572', opacity: 0.08, transparent: true });
+  const line = new THREE.Mesh(lineGeo, lineMat);
+  line.rotation.x = -Math.PI / 2;
+  line.position.set(i, 0.001, 0);
+  scene.add(line);
+}
+
+/* ── PARTÍCULAS DE FONDO ── */
+const particleCount = 800;
+const positions = new Float32Array(particleCount * 3);
+for (let i = 0; i < particleCount * 3; i++) {
+  positions[i] = (Math.random() - 0.5) * 40;
+}
+const partGeo = new THREE.BufferGeometry();
+partGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+const partMat = new THREE.PointsMaterial({
+  color: '#C5A572',
+  size: 0.04,
+  transparent: true,
+  opacity: 0.4,
+});
+scene.add(new THREE.Points(partGeo, partMat));
+
+/* ── LOADER PROGRESS ── */
+const loaderEl  = document.getElementById('loader');
+const loaderBar = document.getElementById('loaderBar');
+
+const manager = new THREE.LoadingManager(
+  () => {
+    // Carga completa
+    loaderBar.style.width = '100%';
+    setTimeout(() => {
+      loaderEl.classList.add('done');
+      setTimeout(() => loaderEl.remove(), 900);
+      document.getElementById('carTitleBlock').classList.add('visible');
+      document.getElementById('carActions').classList.add('visible');
+      document.getElementById('specsStrip').classList.add('visible');
+      document.getElementById('colorPicker').classList.add('visible');
+    }, 400);
+  },
+  (url, loaded, total) => {
+    loaderBar.style.width = `${(loaded / total) * 95}%`;
+  }
+);
+
+/* ── CARGAR MODELO ── */
+const dracoLoader = new DRACOLoader();
+dracoLoader.setDecoderPath('https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/libs/draco/');
+
+const gltfLoader = new GLTFLoader(manager);
+gltfLoader.setDRACOLoader(dracoLoader);
+
+let carBodyMaterials = [];
+let carModel;
+
+// Modelo Ferrari F40 oficial de Three.js
+gltfLoader.load(
+  'https://threejs.org/examples/models/gltf/ferrari.glb',
+  (gltf) => {
+    carModel = gltf.scene;
+    carModel.scale.set(1, 1, 1);
+    carModel.position.set(0, 0, 0);
+    carModel.traverse(child => {
+      if (child.isMesh) {
+        child.castShadow = true;
+        child.receiveShadow = true;
+        // Detectar materiales de carrocería (no vidrios ni ruedas)
+        if (child.material && child.material.color) {
+          const col = child.material.color;
+          const isBody = col.r > 0.3 || col.g < 0.2;
+          if (isBody && !child.name.toLowerCase().includes('glass')
+                     && !child.name.toLowerCase().includes('window')
+                     && !child.name.toLowerCase().includes('wheel')
+                     && !child.name.toLowerCase().includes('tire')) {
+            child.material = child.material.clone();
+            child.material.color.set('#C5A572');
+            child.material.metalness = 0.9;
+            child.material.roughness = 0.15;
+            carBodyMaterials.push(child.material);
+          }
+        }
+      }
+    });
+    scene.add(carModel);
+  }
+);
+
+/* ── CAMBIO DE COLOR ── */
+document.querySelectorAll('.color-dot').forEach(dot => {
+  dot.addEventListener('click', () => {
+    document.querySelectorAll('.color-dot').forEach(d => d.classList.remove('active'));
+    dot.classList.add('active');
+    const color = dot.dataset.color;
+    carBodyMaterials.forEach(mat => mat.color.set(color));
+  });
+});
+
+/* ── HINT: desaparece al primer drag ── */
+const hint = document.getElementById('hint');
+let hintGone = false;
+canvas.addEventListener('pointerdown', () => {
+  if (!hintGone) {
+    hintGone = true;
+    hint.classList.add('hidden');
+    controls.autoRotate = false;
+  }
+});
+
+/* ── RESIZE ── */
+window.addEventListener('resize', () => {
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  composer.setSize(window.innerWidth, window.innerHeight);
+});
+
+/* ── ANIMACION PARTÍCULAS ── */
+let t = 0;
+function animate() {
+  requestAnimationFrame(animate);
+  t += 0.001;
+
+  // Rotación suave de partículas
+  partMat.opacity = 0.3 + Math.sin(t * 2) * 0.1;
+
+  controls.update();
+  composer.render();
+}
+animate();
+</script>
+
+</body>
+</html>
