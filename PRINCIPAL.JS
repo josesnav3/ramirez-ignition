@@ -127,16 +127,26 @@ document.querySelectorAll('.stat-num').forEach(el => {
 });
 
 
-/* ─── 10. GALLERY ITEMS REVEAL ───────────────────── */
-gsap.from('.gallery-item', {
-  opacity: 0,
-  scale: 0.96,
-  duration: 0.7,
-  stagger: 0.1,
-  ease: 'power3.out',
-  scrollTrigger: {
-    trigger: '.gallery-grid',
-    start: 'top 85%',
+/* ─── 10. GALLERY SWIPER ─────────────────────────── */
+new Swiper('.gallery-swiper', {
+  loop: true,
+  speed: 750,
+  centeredSlides: true,
+  slidesPerView: 1.15,
+  spaceBetween: 12,
+  autoplay: {
+    delay: 3500,
+    disableOnInteraction: false,
+    pauseOnMouseEnter: true,
+  },
+  navigation: {
+    prevEl: '.gallery-swiper .swiper-button-prev',
+    nextEl: '.gallery-swiper .swiper-button-next',
+  },
+  breakpoints: {
+    600:  { slidesPerView: 1.6,  spaceBetween: 16 },
+    900:  { slidesPerView: 2.2,  spaceBetween: 20 },
+    1200: { slidesPerView: 2.8,  spaceBetween: 24 },
   },
 });
 
