@@ -1,19 +1,19 @@
 <!doctype html>
-<html lang="es" data-theme="noir-gold">
+<html lang="es">
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1"/>
   <title>Ramírez Ignition — Showroom Premium</title>
 
-  <!-- Fuentes -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet"/>
-  <link href="https://fonts.googleapis.com/css2?family=Corinthia:wght@400;700&display=swap" rel="stylesheet"/>
+  <!-- Google Fonts: Chakra Petch + DM Mono + DM Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,300;0,400;0,600;0,700;1,300&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet"/>
 
-  <!-- Bootstrap + Icons -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <!-- Bootstrap Icons (solo iconos, no CSS de Bootstrap) -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet"/>
 
-  <!-- Swiper -->
+  <!-- Swiper CSS -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
 
   <!-- Estilos propios -->
@@ -21,833 +21,904 @@
 </head>
 <body>
 
-<!-- ═══════════════════════════════════════════════
+<!-- ══════════════════════════════════════════════════
+     BOOT OVERLAY
+══════════════════════════════════════════════════ -->
+<div id="bootOverlay" class="boot-overlay" aria-hidden="true">
+  <div class="boot-inner">
+    <div class="boot-logo">RI</div>
+    <div class="boot-lines">
+      <p class="boot-line" data-delay="0">RAMÍREZ IGNITION OS v2.4.1</p>
+      <p class="boot-line" data-delay="1">CARGANDO INVENTARIO...</p>
+      <div class="boot-bar-wrap" data-delay="2">
+        <div class="boot-bar"></div>
+      </div>
+      <p class="boot-line" data-delay="3">▸ SISTEMA LISTO.</p>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════
      NAVBAR
-═══════════════════════════════════════════════ -->
-<nav class="navbar navbar-expand-lg fixed-top navbar-site" id="navbar">
-  <div class="container">
-    <a class="navbar-brand brand-logo" href="#">
-      <span class="brand-text">
-        <span class="brand-name">Ramirez Inition</span>
-        <span class="brand-sub">Luxury Automotive</span>
+══════════════════════════════════════════════════ -->
+<nav class="navbar" id="navbar">
+  <div class="nav-container">
+    <a class="nav-brand" href="#">
+      <span class="brand-sigil">RI</span>
+      <span class="brand-stack">
+        <span class="brand-name">Ramírez Ignition</span>
+        <span class="brand-tag">LUXURY AUTOMOTIVE</span>
       </span>
     </a>
 
-    <button class="navbar-toggler border-0 shadow-none" type="button"
-            data-bs-toggle="collapse" data-bs-target="#navMenu">
-      <i class="bi bi-list fs-4 nav-toggle-icon"></i>
+    <button class="nav-toggle" id="navToggle" aria-label="Abrir menú">
+      <span></span><span></span><span></span>
     </button>
 
-    <div id="navMenu" class="collapse navbar-collapse">
-      <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
-        <li class="nav-item"><a class="nav-link" href="#coleccion">Colección</a></li>
-        <li class="nav-item"><a class="nav-link" href="#porque">Por qué nosotros</a></li>
-        <li class="nav-item"><a class="nav-link" href="#contacto">Contacto</a></li>
-      </ul>
-
-      <!-- Selector de tema -->
-      <div class="theme-switcher ms-lg-4 my-3 my-lg-0" aria-label="Cambiar tema">
-        <button class="theme-dot active" data-theme="noir-gold"   title="Noir Gold"       style="background:#C5A572"></button>
-        <button class="theme-dot"        data-theme="arctic-white" title="Arctic White"    style="background:#9BA0A6"></button>
-        <button class="theme-dot"        data-theme="midnight-carbon" title="Midnight Carbon" style="background:#C0392B"></button>
-        <button class="theme-dot"        data-theme="deep-navy"    title="Deep Navy"       style="background:#4A9ECC"></button>
-      </div>
-
-      <a class="btn btn-accent rounded-pill px-4 ms-lg-3 mt-3 mt-lg-0" href="#coleccion">
-        <i class="bi bi-grid-3x3-gap me-1"></i> Ver Autos
-      </a>
-      <a class="btn btn-outline-light rounded-pill px-4 ms-lg-2 mt-3 mt-lg-0" href="experiencia3d.html">
-        <i class="bi bi-box me-1"></i> Experiencia 3D
-      </a>
+    <div class="nav-links" id="navLinks">
+      <a href="#coleccion"  class="nav-link">Colección</a>
+      <a href="#galeria"    class="nav-link">Galería</a>
+      <a href="#porque"     class="nav-link">Nosotros</a>
+      <a href="#contacto"   class="nav-link">Contacto</a>
+      <a href="experiencia3d.html" class="nav-link nav-3d">3D</a>
+      <a href="#coleccion"  class="nav-cta">Ver Autos</a>
     </div>
   </div>
 </nav>
 
 
-<!-- ═══════════════════════════════════════════════
+<!-- ══════════════════════════════════════════════════
      HERO
-═══════════════════════════════════════════════ -->
+══════════════════════════════════════════════════ -->
 <section class="hero" id="hero">
-  <!-- Cinta de autos animada al fondo -->
-  <div class="ribbon-track" aria-hidden="true">
-    <div class="ribbon">
-      <img src="img/05-yamaha-raptor-azul/raptor-azul-1.jpeg" alt=""/>
-      <img src="img/06-jeep-wrangler-azul/wrangler-azul-1.jpeg" alt=""/>
-      <img src="img/05-yamaha-raptor-azul/raptor-azul-2.jpeg" alt=""/>
-      <img src="img/06-jeep-wrangler-azul/wrangler-azul-4.jpeg" alt=""/>
-      <img src="img/11-suv-negro-levantado/suv-negro-1.jpeg" alt=""/>
-      <img src="img/06-jeep-wrangler-azul/wrangler-azul-5.jpeg" alt=""/>
-      <img src="img/11-suv-negro-levantado/suv-negro-2.jpeg" alt=""/>
-      <img src="img/06-jeep-wrangler-azul/wrangler-azul-6.jpeg" alt=""/>
-      <img src="img/04-honda-crv-plata/raptor-azul-3.jpeg" alt=""/>
-      <img src="img/06-jeep-wrangler-azul/wrangler-azul-7.jpeg" alt=""/>
+
+  <!-- Cinta de autos al fondo -->
+  <div class="hero-ribbon" aria-hidden="true">
+    <div class="hero-ribbon-inner">
+      <img src="img/06-jeep-wrangler-azul/wrangler-azul-1.jpeg"   alt=""/>
+      <img src="img/05-yamaha-raptor-azul/raptor-azul-1.jpeg"      alt=""/>
+      <img src="img/11-suv-negro-levantado/suv-negro-1.jpeg"       alt=""/>
+      <img src="img/06-jeep-wrangler-azul/wrangler-azul-4.jpeg"   alt=""/>
+      <img src="img/05-yamaha-raptor-azul/raptor-azul-2.jpeg"      alt=""/>
+      <img src="img/11-suv-negro-levantado/suv-negro-2.jpeg"       alt=""/>
+      <img src="img/13-toyota-landcruiser-verde/landcruiser-1.jpeg" alt=""/>
+      <img src="img/06-jeep-wrangler-azul/wrangler-azul-6.jpeg"   alt=""/>
       <!-- duplicado para loop continuo -->
-      <img src="img/05-yamaha-raptor-azul/raptor-azul-1.jpeg" alt=""/>
-      <img src="img/06-jeep-wrangler-azul/wrangler-azul-1.jpeg" alt=""/>
-      <img src="img/05-yamaha-raptor-azul/raptor-azul-2.jpeg" alt=""/>
-      <img src="img/06-jeep-wrangler-azul/wrangler-azul-4.jpeg" alt=""/>
-      <img src="img/11-suv-negro-levantado/suv-negro-1.jpeg" alt=""/>
-      <img src="img/06-jeep-wrangler-azul/wrangler-azul-5.jpeg" alt=""/>
-      <img src="img/11-suv-negro-levantado/suv-negro-2.jpeg" alt=""/>
-      <img src="img/06-jeep-wrangler-azul/wrangler-azul-6.jpeg" alt=""/>
-      <img src="img/04-honda-crv-plata/raptor-azul-3.jpeg" alt=""/>
-      <img src="img/06-jeep-wrangler-azul/wrangler-azul-7.jpeg" alt=""/>
+      <img src="img/06-jeep-wrangler-azul/wrangler-azul-1.jpeg"   alt=""/>
+      <img src="img/05-yamaha-raptor-azul/raptor-azul-1.jpeg"      alt=""/>
+      <img src="img/11-suv-negro-levantado/suv-negro-1.jpeg"       alt=""/>
+      <img src="img/06-jeep-wrangler-azul/wrangler-azul-4.jpeg"   alt=""/>
+      <img src="img/05-yamaha-raptor-azul/raptor-azul-2.jpeg"      alt=""/>
+      <img src="img/11-suv-negro-levantado/suv-negro-2.jpeg"       alt=""/>
+      <img src="img/13-toyota-landcruiser-verde/landcruiser-1.jpeg" alt=""/>
+      <img src="img/06-jeep-wrangler-azul/wrangler-azul-6.jpeg"   alt=""/>
     </div>
   </div>
 
-  <div class="hero-overlay"></div>
+  <!-- Gradiente -->
+  <div class="hero-gradient"></div>
 
-  <div class="hero-content container text-center">
-    <p class="hero-eyebrow" id="heroEyebrow">Showroom Premium</p>
+  <!-- HUD corners + data readouts -->
+  <div class="hud-overlay" aria-hidden="true">
+    <div class="hud-corner hud-tl"></div>
+    <div class="hud-corner hud-tr"></div>
+    <div class="hud-corner hud-bl"></div>
+    <div class="hud-corner hud-br"></div>
+    <div class="hud-data hud-data-1" id="hudData1">
+      <span class="hd-label">INVENTARIO</span>
+      <span class="hd-val">17 UNIDADES</span>
+    </div>
+    <div class="hud-data hud-data-2" id="hudData2">
+      <span class="hd-label">ESTADO</span>
+      <span class="hd-val status-ok">OPERATIVO</span>
+    </div>
+    <div class="hud-data hud-data-3" id="hudData3">
+      <span class="hd-label">UBICACIÓN</span>
+      <span class="hd-val">EL SALVADOR</span>
+    </div>
+  </div>
+
+  <!-- Contenido principal -->
+  <div class="hero-content">
+    <p class="hero-eyebrow" id="heroEyebrow">// SHOWROOM PREMIUM</p>
     <h1 class="hero-title" id="heroTitle">
-      <span class="hero-line">Autos de</span>
-      <span class="hero-line accent-text">Calidad Superior</span>
+      <span class="ht-line" id="htLine1">RAMÍREZ</span>
+      <span class="ht-line ht-accent" id="htLine2">IGNITION</span>
     </h1>
     <p class="hero-sub" id="heroSub">
       Cada vehículo seleccionado con criterio.<br>
       Porque conducir bien es una declaración de carácter.
     </p>
+    <div class="hero-ctas" id="heroCtas">
+      <a href="#coleccion" class="btn-primary-hud">
+        <span class="btn-icon"><i class="bi bi-grid-3x3-gap"></i></span>
+        Ver Colección
+      </a>
+      <a href="experiencia3d.html" class="btn-ghost-hud">
+        <i class="bi bi-box"></i> Experiencia 3D
+      </a>
+    </div>
   </div>
 
-  <!-- Scroll indicator -->
-  <div class="scroll-indicator" aria-hidden="true">
-    <span></span>
+  <!-- Indicador de scroll -->
+  <div class="hero-scroll" aria-hidden="true">
+    <span class="scroll-line"></span>
+    <span class="scroll-label">SCROLL</span>
   </div>
 </section>
 
 
-<!-- ═══════════════════════════════════════════════
-     COLECCIÓN / SHOWROOM
-═══════════════════════════════════════════════ -->
-<section class="section-showroom" id="coleccion">
-  <div class="container">
+<!-- ══════════════════════════════════════════════════
+     STATS BAR
+══════════════════════════════════════════════════ -->
+<section class="stats-bar" id="stats">
+  <div class="stats-container">
+    <div class="stat-item">
+      <span class="stat-num" data-target="200">0</span><span class="stat-plus">+</span>
+      <span class="stat-label">Clientes satisfechos</span>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat-item">
+      <span class="stat-num" data-target="17">0</span>
+      <span class="stat-label">Unidades en stock</span>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat-item">
+      <span class="stat-num" data-target="8">0</span><span class="stat-plus">+</span>
+      <span class="stat-label">Años de experiencia</span>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat-item">
+      <span class="stat-num" data-target="100">0</span><span class="stat-plus">%</span>
+      <span class="stat-label">Satisfacción garantizada</span>
+    </div>
+  </div>
+</section>
 
-    <div class="section-header text-center mb-5" data-reveal>
-      <p class="section-eyebrow">Inventario actual</p>
-      <h2 class="section-title">Nuestra <span class="accent-text">Colección</span></h2>
+
+<!-- ══════════════════════════════════════════════════
+     COLECCIÓN
+══════════════════════════════════════════════════ -->
+<section class="section-catalog" id="coleccion">
+  <div class="catalog-container">
+
+    <div class="section-header" data-reveal>
+      <p class="section-tag">// INVENTARIO ACTUAL</p>
+      <h2 class="section-title">Nuestra <em>Colección</em></h2>
       <p class="section-sub">Autos verificados, listos para ser tuyos.</p>
     </div>
 
     <!-- Filtros -->
-    <div class="filters-bar mb-5" data-reveal>
-      <div class="filter-pills">
-        <button class="filter-pill active" data-filter="all">Todos</button>
-        <button class="filter-pill" data-filter="disponible">Disponible</button>
-        <button class="filter-pill" data-filter="reservado">Reservado</button>
+    <div class="filters-row" data-reveal>
+      <div class="filter-group">
+        <button class="filter-btn active" data-filter="all">ALL</button>
+        <button class="filter-btn" data-filter="disponible">DISPONIBLE</button>
+        <button class="filter-btn" data-filter="reservado">RESERVADO</button>
       </div>
-      <div class="filter-search">
-        <i class="bi bi-search"></i>
-        <input type="text" id="searchInput" placeholder="Buscar marca o modelo…" autocomplete="off"/>
+      <div class="search-wrap">
+        <i class="bi bi-search search-icon"></i>
+        <input type="text" id="searchInput" class="search-input" placeholder="BUSCAR MODELO..." autocomplete="off"/>
       </div>
     </div>
 
     <!-- Grid de autos -->
     <div class="cars-grid" id="carsGrid">
 
-      <!-- ── Autos de demostración ── -->
-
-      <!-- Auto 1: BMW M3 -->
+      <!-- DEMO: BMW M3 Competition -->
       <article class="car-card" data-status="disponible" data-name="bmw m3 competition 2022">
-        <div class="car-swiper swiper">
-          <div class="swiper-wrapper">
-            <div class="swiper-slide"><img src="https://images.unsplash.com/photo-1555215695-3004980ad54e?w=800&q=85" alt="BMW M3 Competition"/></div>
-            <div class="swiper-slide"><img src="https://images.unsplash.com/photo-1617469767053-d3b523a0b982?w=800&q=85" alt="BMW M3 interior"/></div>
-            <div class="swiper-slide"><img src="https://images.unsplash.com/photo-1580274455191-1c62238fa333?w=800&q=85" alt="BMW M3 lateral"/></div>
+        <div class="card-image">
+          <div class="car-swiper swiper">
+            <div class="swiper-wrapper">
+              <div class="swiper-slide"><img src="https://images.unsplash.com/photo-1555215695-3004980ad54e?w=800&q=85" alt="BMW M3 Competition"/></div>
+              <div class="swiper-slide"><img src="https://images.unsplash.com/photo-1617469767053-d3b523a0b982?w=800&q=85" alt="BMW M3 interior"/></div>
+              <div class="swiper-slide"><img src="https://images.unsplash.com/photo-1580274455191-1c62238fa333?w=800&q=85" alt="BMW M3 lateral"/></div>
+            </div>
+            <div class="swiper-pagination"></div>
           </div>
-          <div class="swiper-pagination"></div>
-          <div class="swiper-button-prev"></div>
-          <div class="swiper-button-next"></div>
+          <span class="car-status disponible">DISPONIBLE</span>
         </div>
-        <span class="car-badge disponible"><i class="bi bi-check-circle-fill me-1"></i>Disponible</span>
-        <div class="car-info">
-          <div class="car-meta">
-            <span><i class="bi bi-calendar3"></i> 2022</span>
-            <span><i class="bi bi-speedometer"></i> 28,400 km</span>
-            <span><i class="bi bi-gear"></i> Automático</span>
-          </div>
-          <h3 class="car-name">BMW M3 Competition</h3>
-          <p class="car-engine"><i class="bi bi-lightning-charge-fill me-1"></i>3.0L Twin-Turbo · 510 hp</p>
-          <div class="car-footer">
-            <span class="car-price">$85,000</span>
-            <a href="https://wa.me/70145424?text=Hola%2C%20vi%20el%20BMW%20M3%20Competition%202022%20en%20tu%20p%C3%A1gina%20y%20me%20interesa%20%F0%9F%9A%97"
-               class="btn-whatsapp" target="_blank" rel="noopener">
+        <div class="card-specs">
+          <p class="spec-tag">2022 · 28,400 km · Automático</p>
+          <h3 class="spec-name">BMW M3 Competition</h3>
+          <p class="spec-engine"><i class="bi bi-lightning-charge-fill"></i>3.0L Twin-Turbo · 510 hp</p>
+          <div class="spec-divider"></div>
+          <div class="spec-footer">
+            <span class="spec-price">$85,000</span>
+            <a href="https://wa.me/70145424?text=Hola%2C%20vi%20el%20BMW%20M3%20Competition%202022%20y%20me%20interesa%20%F0%9F%9A%97" class="btn-consult" target="_blank" rel="noopener">
               <i class="bi bi-whatsapp"></i> Consultar
             </a>
           </div>
         </div>
       </article>
 
-      <!-- Auto 2: Mercedes GLE -->
+      <!-- DEMO: Mercedes-Benz GLE 450 -->
       <article class="car-card" data-status="disponible" data-name="mercedes-benz gle 450 2021">
-        <div class="car-swiper swiper">
-          <div class="swiper-wrapper">
-            <div class="swiper-slide"><img src="https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?w=800&q=85" alt="Mercedes GLE"/></div>
-            <div class="swiper-slide"><img src="https://images.unsplash.com/photo-1606664515524-ed2f786a0bd6?w=800&q=85" alt="Mercedes interior"/></div>
-            <div class="swiper-slide"><img src="https://images.unsplash.com/photo-1549399542-7e3f8b79c341?w=800&q=85" alt="Mercedes lateral"/></div>
+        <div class="card-image">
+          <div class="car-swiper swiper">
+            <div class="swiper-wrapper">
+              <div class="swiper-slide"><img src="https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?w=800&q=85" alt="Mercedes GLE"/></div>
+              <div class="swiper-slide"><img src="https://images.unsplash.com/photo-1606664515524-ed2f786a0bd6?w=800&q=85" alt="Mercedes interior"/></div>
+              <div class="swiper-slide"><img src="https://images.unsplash.com/photo-1549399542-7e3f8b79c341?w=800&q=85" alt="Mercedes lateral"/></div>
+            </div>
+            <div class="swiper-pagination"></div>
           </div>
-          <div class="swiper-pagination"></div>
-          <div class="swiper-button-prev"></div>
-          <div class="swiper-button-next"></div>
+          <span class="car-status disponible">DISPONIBLE</span>
         </div>
-        <span class="car-badge disponible"><i class="bi bi-check-circle-fill me-1"></i>Disponible</span>
-        <div class="car-info">
-          <div class="car-meta">
-            <span><i class="bi bi-calendar3"></i> 2021</span>
-            <span><i class="bi bi-speedometer"></i> 41,200 km</span>
-            <span><i class="bi bi-gear"></i> Automático</span>
-          </div>
-          <h3 class="car-name">Mercedes-Benz GLE 450</h3>
-          <p class="car-engine"><i class="bi bi-lightning-charge-fill me-1"></i>3.0L Turbo · 362 hp</p>
-          <div class="car-footer">
-            <span class="car-price">$72,000</span>
-            <a href="https://wa.me/70145424?text=Hola%2C%20vi%20el%20Mercedes-Benz%20GLE%20450%202021%20en%20tu%20p%C3%A1gina%20y%20me%20interesa%20%F0%9F%9A%97"
-               class="btn-whatsapp" target="_blank" rel="noopener">
+        <div class="card-specs">
+          <p class="spec-tag">2021 · 41,200 km · Automático</p>
+          <h3 class="spec-name">Mercedes-Benz GLE 450</h3>
+          <p class="spec-engine"><i class="bi bi-lightning-charge-fill"></i>3.0L Turbo · 362 hp</p>
+          <div class="spec-divider"></div>
+          <div class="spec-footer">
+            <span class="spec-price">$72,000</span>
+            <a href="https://wa.me/70145424?text=Hola%2C%20vi%20el%20Mercedes-Benz%20GLE%20450%202021%20y%20me%20interesa%20%F0%9F%9A%97" class="btn-consult" target="_blank" rel="noopener">
               <i class="bi bi-whatsapp"></i> Consultar
             </a>
           </div>
         </div>
       </article>
 
-      <!-- Auto 3: Porsche 911 -->
+      <!-- DEMO: Porsche 911 Carrera S -->
       <article class="car-card" data-status="reservado" data-name="porsche 911 carrera s 2020">
-        <div class="car-swiper swiper">
-          <div class="swiper-wrapper">
-            <div class="swiper-slide"><img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=800&q=85" alt="Porsche 911"/></div>
-            <div class="swiper-slide"><img src="https://images.unsplash.com/photo-1544636331-e26879cd4d9b?w=800&q=85" alt="Porsche interior"/></div>
-            <div class="swiper-slide"><img src="https://images.unsplash.com/photo-1526726538690-5cbf956ae2fd?w=800&q=85" alt="Porsche trasero"/></div>
+        <div class="card-image">
+          <div class="car-swiper swiper">
+            <div class="swiper-wrapper">
+              <div class="swiper-slide"><img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=800&q=85" alt="Porsche 911"/></div>
+              <div class="swiper-slide"><img src="https://images.unsplash.com/photo-1544636331-e26879cd4d9b?w=800&q=85" alt="Porsche interior"/></div>
+              <div class="swiper-slide"><img src="https://images.unsplash.com/photo-1526726538690-5cbf956ae2fd?w=800&q=85" alt="Porsche trasero"/></div>
+            </div>
+            <div class="swiper-pagination"></div>
           </div>
-          <div class="swiper-pagination"></div>
-          <div class="swiper-button-prev"></div>
-          <div class="swiper-button-next"></div>
+          <span class="car-status reservado">RESERVADO</span>
         </div>
-        <span class="car-badge reservado"><i class="bi bi-clock-fill me-1"></i>Reservado</span>
-        <div class="car-info">
-          <div class="car-meta">
-            <span><i class="bi bi-calendar3"></i> 2020</span>
-            <span><i class="bi bi-speedometer"></i> 19,800 km</span>
-            <span><i class="bi bi-gear"></i> PDK</span>
-          </div>
-          <h3 class="car-name">Porsche 911 Carrera S</h3>
-          <p class="car-engine"><i class="bi bi-lightning-charge-fill me-1"></i>3.0L Twin-Turbo · 450 hp</p>
-          <div class="car-footer">
-            <span class="car-price">$118,000</span>
-            <a href="https://wa.me/70145424?text=Hola%2C%20vi%20el%20Porsche%20911%20Carrera%20S%202020%20en%20tu%20p%C3%A1gina%20%F0%9F%9A%97"
-               class="btn-whatsapp" target="_blank" rel="noopener">
+        <div class="card-specs">
+          <p class="spec-tag">2020 · 19,800 km · PDK</p>
+          <h3 class="spec-name">Porsche 911 Carrera S</h3>
+          <p class="spec-engine"><i class="bi bi-lightning-charge-fill"></i>3.0L Twin-Turbo · 450 hp</p>
+          <div class="spec-divider"></div>
+          <div class="spec-footer">
+            <span class="spec-price">$118,000</span>
+            <a href="https://wa.me/70145424?text=Hola%2C%20vi%20el%20Porsche%20911%20Carrera%20S%202020%20%F0%9F%9A%97" class="btn-consult" target="_blank" rel="noopener">
               <i class="bi bi-whatsapp"></i> Consultar
             </a>
           </div>
         </div>
       </article>
 
-      <!-- ── Autos reales ── -->
-
-      <!-- 1. Mitsubishi Lancer Gris -->
+      <!-- 1. Mitsubishi Lancer -->
       <article class="car-card" data-status="disponible" data-name="mitsubishi lancer 2007">
-        <div class="car-swiper swiper">
-          <div class="swiper-wrapper">
-            <div class="swiper-slide"><img src="img/01-mitsubishi-lancer-gris/lancer-gris-1.jpeg" alt="Mitsubishi Lancer"/></div>
-            <div class="swiper-slide"><img src="img/01-mitsubishi-lancer-gris/lancer-gris-2.jpeg" alt="Mitsubishi Lancer"/></div>
-            <div class="swiper-slide"><img src="img/01-mitsubishi-lancer-gris/lancer-gris-3.jpeg" alt="Mitsubishi Lancer"/></div>
-            <div class="swiper-slide"><img src="img/01-mitsubishi-lancer-gris/lancer-gris-4.jpeg" alt="Mitsubishi Lancer"/></div>
+        <div class="card-image">
+          <div class="car-swiper swiper">
+            <div class="swiper-wrapper">
+              <div class="swiper-slide"><img src="img/01-mitsubishi-lancer-gris/lancer-gris-1.jpeg" alt="Mitsubishi Lancer"/></div>
+              <div class="swiper-slide"><img src="img/01-mitsubishi-lancer-gris/lancer-gris-2.jpeg" alt="Mitsubishi Lancer"/></div>
+              <div class="swiper-slide"><img src="img/01-mitsubishi-lancer-gris/lancer-gris-3.jpeg" alt="Mitsubishi Lancer"/></div>
+              <div class="swiper-slide"><img src="img/01-mitsubishi-lancer-gris/lancer-gris-4.jpeg" alt="Mitsubishi Lancer"/></div>
+            </div>
+            <div class="swiper-pagination"></div>
           </div>
-          <div class="swiper-pagination"></div>
-          <div class="swiper-button-prev"></div><div class="swiper-button-next"></div>
+          <span class="car-status disponible">DISPONIBLE</span>
         </div>
-        <span class="car-badge disponible"><i class="bi bi-check-circle-fill me-1"></i>Disponible</span>
-        <div class="car-info">
-          <div class="car-meta">
-            <span><i class="bi bi-calendar3"></i> 2007</span>
-            <span><i class="bi bi-speedometer"></i> 85,000 km</span>
-            <span><i class="bi bi-gear"></i> Manual</span>
-          </div>
-          <h3 class="car-name">Mitsubishi Lancer</h3>
-          <p class="car-engine"><i class="bi bi-lightning-charge-fill me-1"></i>1.6L · 103 hp</p>
-          <div class="car-footer">
-            <span class="car-price">$7,500</span>
-            <a href="https://wa.me/70145424?text=Hola%2C%20me%20interesa%20el%20Mitsubishi%20Lancer%202007%20%F0%9F%9A%97" class="btn-whatsapp" target="_blank" rel="noopener"><i class="bi bi-whatsapp"></i> Consultar</a>
+        <div class="card-specs">
+          <p class="spec-tag">2007 · 85,000 km · Manual</p>
+          <h3 class="spec-name">Mitsubishi Lancer</h3>
+          <p class="spec-engine"><i class="bi bi-lightning-charge-fill"></i>1.6L · 103 hp</p>
+          <div class="spec-divider"></div>
+          <div class="spec-footer">
+            <span class="spec-price">$7,500</span>
+            <a href="https://wa.me/70145424?text=Hola%2C%20me%20interesa%20el%20Mitsubishi%20Lancer%202007%20%F0%9F%9A%97" class="btn-consult" target="_blank" rel="noopener">
+              <i class="bi bi-whatsapp"></i> Consultar
+            </a>
           </div>
         </div>
       </article>
 
       <!-- 2. Toyota RAV4 Gris -->
       <article class="car-card" data-status="disponible" data-name="toyota rav4 gris 2010">
-        <div class="car-swiper swiper">
-          <div class="swiper-wrapper">
-            <div class="swiper-slide"><img src="img/00-toyota-rav4-gris/rav4-gris-1.jpeg" alt="Toyota RAV4 Gris"/></div>
-            <div class="swiper-slide"><img src="img/00-toyota-rav4-gris/rav4-gris-2.jpeg" alt="Toyota RAV4 Gris"/></div>
-            <div class="swiper-slide"><img src="img/00-toyota-rav4-gris/rav4-gris-3.jpeg" alt="Toyota RAV4 Gris"/></div>
+        <div class="card-image">
+          <div class="car-swiper swiper">
+            <div class="swiper-wrapper">
+              <div class="swiper-slide"><img src="img/00-toyota-rav4-gris/rav4-gris-1.jpeg" alt="Toyota RAV4 Gris"/></div>
+              <div class="swiper-slide"><img src="img/00-toyota-rav4-gris/rav4-gris-2.jpeg" alt="Toyota RAV4 Gris"/></div>
+              <div class="swiper-slide"><img src="img/00-toyota-rav4-gris/rav4-gris-3.jpeg" alt="Toyota RAV4 Gris"/></div>
+            </div>
+            <div class="swiper-pagination"></div>
           </div>
-          <div class="swiper-pagination"></div>
-          <div class="swiper-button-prev"></div><div class="swiper-button-next"></div>
+          <span class="car-status disponible">DISPONIBLE</span>
         </div>
-        <span class="car-badge disponible"><i class="bi bi-check-circle-fill me-1"></i>Disponible</span>
-        <div class="car-info">
-          <div class="car-meta">
-            <span><i class="bi bi-calendar3"></i> 2010</span>
-            <span><i class="bi bi-speedometer"></i> 115,000 km</span>
-            <span><i class="bi bi-gear"></i> Automático</span>
-          </div>
-          <h3 class="car-name">Toyota RAV4 Gris</h3>
-          <p class="car-engine"><i class="bi bi-lightning-charge-fill me-1"></i>2.4L · 166 hp</p>
-          <div class="car-footer">
-            <span class="car-price">$15,000</span>
-            <a href="https://wa.me/70145424?text=Hola%2C%20me%20interesa%20el%20Toyota%20RAV4%20Gris%20%F0%9F%9A%97" class="btn-whatsapp" target="_blank" rel="noopener"><i class="bi bi-whatsapp"></i> Consultar</a>
+        <div class="card-specs">
+          <p class="spec-tag">2010 · 115,000 km · Automático</p>
+          <h3 class="spec-name">Toyota RAV4 Gris</h3>
+          <p class="spec-engine"><i class="bi bi-lightning-charge-fill"></i>2.4L · 166 hp</p>
+          <div class="spec-divider"></div>
+          <div class="spec-footer">
+            <span class="spec-price">$15,000</span>
+            <a href="https://wa.me/70145424?text=Hola%2C%20me%20interesa%20el%20Toyota%20RAV4%20Gris%20%F0%9F%9A%97" class="btn-consult" target="_blank" rel="noopener">
+              <i class="bi bi-whatsapp"></i> Consultar
+            </a>
           </div>
         </div>
       </article>
 
       <!-- 3. Toyota RAV4 Rojo -->
       <article class="car-card" data-status="disponible" data-name="toyota rav4 rojo 2008">
-        <div class="car-swiper swiper">
-          <div class="swiper-wrapper">
-            <div class="swiper-slide"><img src="img/02-toyota-rav4-rojo/rav4-rojo-1.jpeg" alt="Toyota RAV4 Rojo"/></div>
-            <div class="swiper-slide"><img src="img/02-toyota-rav4-rojo/rav4-rojo-2.jpeg" alt="Toyota RAV4 Rojo"/></div>
-            <div class="swiper-slide"><img src="img/02-toyota-rav4-rojo/civic-mod-3.jpeg" alt="Toyota RAV4 Rojo"/></div>
+        <div class="card-image">
+          <div class="car-swiper swiper">
+            <div class="swiper-wrapper">
+              <div class="swiper-slide"><img src="img/02-toyota-rav4-rojo/rav4-rojo-1.jpeg" alt="Toyota RAV4 Rojo"/></div>
+              <div class="swiper-slide"><img src="img/02-toyota-rav4-rojo/rav4-rojo-2.jpeg" alt="Toyota RAV4 Rojo"/></div>
+            </div>
+            <div class="swiper-pagination"></div>
           </div>
-          <div class="swiper-pagination"></div>
-          <div class="swiper-button-prev"></div><div class="swiper-button-next"></div>
+          <span class="car-status disponible">DISPONIBLE</span>
         </div>
-        <span class="car-badge disponible"><i class="bi bi-check-circle-fill me-1"></i>Disponible</span>
-        <div class="car-info">
-          <div class="car-meta">
-            <span><i class="bi bi-calendar3"></i> 2008</span>
-            <span><i class="bi bi-speedometer"></i> 120,000 km</span>
-            <span><i class="bi bi-gear"></i> Automático</span>
-          </div>
-          <h3 class="car-name">Toyota RAV4 Rojo</h3>
-          <p class="car-engine"><i class="bi bi-lightning-charge-fill me-1"></i>2.4L · 166 hp</p>
-          <div class="car-footer">
-            <span class="car-price">$14,000</span>
-            <a href="https://wa.me/70145424?text=Hola%2C%20me%20interesa%20el%20Toyota%20RAV4%20Rojo%202008%20%F0%9F%9A%97" class="btn-whatsapp" target="_blank" rel="noopener"><i class="bi bi-whatsapp"></i> Consultar</a>
+        <div class="card-specs">
+          <p class="spec-tag">2008 · 120,000 km · Automático</p>
+          <h3 class="spec-name">Toyota RAV4 Rojo</h3>
+          <p class="spec-engine"><i class="bi bi-lightning-charge-fill"></i>2.4L · 166 hp</p>
+          <div class="spec-divider"></div>
+          <div class="spec-footer">
+            <span class="spec-price">$14,000</span>
+            <a href="https://wa.me/70145424?text=Hola%2C%20me%20interesa%20el%20Toyota%20RAV4%20Rojo%202008%20%F0%9F%9A%97" class="btn-consult" target="_blank" rel="noopener">
+              <i class="bi bi-whatsapp"></i> Consultar
+            </a>
           </div>
         </div>
       </article>
 
-      <!-- 4. Honda Civic Modificado -->
+      <!-- 4. Honda Civic Sport -->
       <article class="car-card" data-status="disponible" data-name="honda civic modificado 2007">
-        <div class="car-swiper swiper">
-          <div class="swiper-wrapper">
-            <div class="swiper-slide"><img src="img/03-honda-civic-modificado/civic-mod-1.jpeg" alt="Honda Civic Modificado"/></div>
-            <div class="swiper-slide"><img src="img/03-honda-civic-modificado/civic-mod-4.jpeg" alt="Honda Civic Modificado"/></div>
-            <div class="swiper-slide"><img src="img/03-honda-civic-modificado/crv-plata-1.jpeg" alt="Honda Civic Modificado"/></div>
+        <div class="card-image">
+          <div class="car-swiper swiper">
+            <div class="swiper-wrapper">
+              <div class="swiper-slide"><img src="img/03-honda-civic-modificado/civic-mod-1.jpeg" alt="Honda Civic Sport"/></div>
+              <div class="swiper-slide"><img src="img/03-honda-civic-modificado/civic-mod-4.jpeg" alt="Honda Civic Sport"/></div>
+            </div>
+            <div class="swiper-pagination"></div>
           </div>
-          <div class="swiper-pagination"></div>
-          <div class="swiper-button-prev"></div><div class="swiper-button-next"></div>
+          <span class="car-status disponible">DISPONIBLE</span>
         </div>
-        <span class="car-badge disponible"><i class="bi bi-check-circle-fill me-1"></i>Disponible</span>
-        <div class="car-info">
-          <div class="car-meta">
-            <span><i class="bi bi-calendar3"></i> 2007</span>
-            <span><i class="bi bi-speedometer"></i> 95,000 km</span>
-            <span><i class="bi bi-gear"></i> Manual</span>
-          </div>
-          <h3 class="car-name">Honda Civic Sport</h3>
-          <p class="car-engine"><i class="bi bi-lightning-charge-fill me-1"></i>1.8L · 140 hp</p>
-          <div class="car-footer">
-            <span class="car-price">$9,500</span>
-            <a href="https://wa.me/70145424?text=Hola%2C%20me%20interesa%20el%20Honda%20Civic%20Sport%202007%20%F0%9F%9A%97" class="btn-whatsapp" target="_blank" rel="noopener"><i class="bi bi-whatsapp"></i> Consultar</a>
+        <div class="card-specs">
+          <p class="spec-tag">2007 · 95,000 km · Manual</p>
+          <h3 class="spec-name">Honda Civic Sport</h3>
+          <p class="spec-engine"><i class="bi bi-lightning-charge-fill"></i>1.8L · 140 hp</p>
+          <div class="spec-divider"></div>
+          <div class="spec-footer">
+            <span class="spec-price">$9,500</span>
+            <a href="https://wa.me/70145424?text=Hola%2C%20me%20interesa%20el%20Honda%20Civic%20Sport%202007%20%F0%9F%9A%97" class="btn-consult" target="_blank" rel="noopener">
+              <i class="bi bi-whatsapp"></i> Consultar
+            </a>
           </div>
         </div>
       </article>
 
       <!-- 5. Honda CR-V Plata -->
       <article class="car-card" data-status="disponible" data-name="honda crv plata 2003">
-        <div class="car-swiper swiper">
-          <div class="swiper-wrapper">
-            <div class="swiper-slide"><img src="img/04-honda-crv-plata/crv-plata-2.jpeg" alt="Honda CR-V"/></div>
-            <div class="swiper-slide"><img src="img/04-honda-crv-plata/raptor-azul-3.jpeg" alt="Honda CR-V"/></div>
+        <div class="card-image">
+          <div class="car-swiper swiper">
+            <div class="swiper-wrapper">
+              <div class="swiper-slide"><img src="img/04-honda-crv-plata/crv-plata-2.jpeg" alt="Honda CR-V Plata"/></div>
+            </div>
+            <div class="swiper-pagination"></div>
           </div>
-          <div class="swiper-pagination"></div>
-          <div class="swiper-button-prev"></div><div class="swiper-button-next"></div>
+          <span class="car-status disponible">DISPONIBLE</span>
         </div>
-        <span class="car-badge disponible"><i class="bi bi-check-circle-fill me-1"></i>Disponible</span>
-        <div class="car-info">
-          <div class="car-meta">
-            <span><i class="bi bi-calendar3"></i> 2003</span>
-            <span><i class="bi bi-speedometer"></i> 140,000 km</span>
-            <span><i class="bi bi-gear"></i> Automático</span>
-          </div>
-          <h3 class="car-name">Honda CR-V Plata</h3>
-          <p class="car-engine"><i class="bi bi-lightning-charge-fill me-1"></i>2.4L · 160 hp</p>
-          <div class="car-footer">
-            <span class="car-price">$8,500</span>
-            <a href="https://wa.me/70145424?text=Hola%2C%20me%20interesa%20el%20Honda%20CR-V%20Plata%202003%20%F0%9F%9A%97" class="btn-whatsapp" target="_blank" rel="noopener"><i class="bi bi-whatsapp"></i> Consultar</a>
+        <div class="card-specs">
+          <p class="spec-tag">2003 · 140,000 km · Automático</p>
+          <h3 class="spec-name">Honda CR-V Plata</h3>
+          <p class="spec-engine"><i class="bi bi-lightning-charge-fill"></i>2.4L · 160 hp</p>
+          <div class="spec-divider"></div>
+          <div class="spec-footer">
+            <span class="spec-price">$8,500</span>
+            <a href="https://wa.me/70145424?text=Hola%2C%20me%20interesa%20el%20Honda%20CR-V%20Plata%202003%20%F0%9F%9A%97" class="btn-consult" target="_blank" rel="noopener">
+              <i class="bi bi-whatsapp"></i> Consultar
+            </a>
           </div>
         </div>
       </article>
 
-      <!-- 6. Yamaha Raptor -->
+      <!-- 6. Yamaha Raptor 700R -->
       <article class="car-card" data-status="disponible" data-name="yamaha raptor 2018">
-        <div class="car-swiper swiper">
-          <div class="swiper-wrapper">
-            <div class="swiper-slide"><img src="img/05-yamaha-raptor-azul/raptor-azul-1.jpeg" alt="Yamaha Raptor"/></div>
-            <div class="swiper-slide"><img src="img/05-yamaha-raptor-azul/raptor-azul-2.jpeg" alt="Yamaha Raptor"/></div>
+        <div class="card-image">
+          <div class="car-swiper swiper">
+            <div class="swiper-wrapper">
+              <div class="swiper-slide"><img src="img/05-yamaha-raptor-azul/raptor-azul-1.jpeg" alt="Yamaha Raptor"/></div>
+              <div class="swiper-slide"><img src="img/05-yamaha-raptor-azul/raptor-azul-2.jpeg" alt="Yamaha Raptor"/></div>
+            </div>
+            <div class="swiper-pagination"></div>
           </div>
-          <div class="swiper-pagination"></div>
-          <div class="swiper-button-prev"></div><div class="swiper-button-next"></div>
+          <span class="car-status disponible">DISPONIBLE</span>
         </div>
-        <span class="car-badge disponible"><i class="bi bi-check-circle-fill me-1"></i>Disponible</span>
-        <div class="car-info">
-          <div class="car-meta">
-            <span><i class="bi bi-calendar3"></i> 2018</span>
-            <span><i class="bi bi-speedometer"></i> Bajo uso</span>
-            <span><i class="bi bi-gear"></i> Manual</span>
-          </div>
-          <h3 class="car-name">Yamaha Raptor 700R</h3>
-          <p class="car-engine"><i class="bi bi-lightning-charge-fill me-1"></i>686cc · 70 hp</p>
-          <div class="car-footer">
-            <span class="car-price">$6,500</span>
-            <a href="https://wa.me/70145424?text=Hola%2C%20me%20interesa%20el%20Yamaha%20Raptor%20700R%20%F0%9F%9A%97" class="btn-whatsapp" target="_blank" rel="noopener"><i class="bi bi-whatsapp"></i> Consultar</a>
+        <div class="card-specs">
+          <p class="spec-tag">2018 · Bajo uso · Manual</p>
+          <h3 class="spec-name">Yamaha Raptor 700R</h3>
+          <p class="spec-engine"><i class="bi bi-lightning-charge-fill"></i>686cc · 70 hp</p>
+          <div class="spec-divider"></div>
+          <div class="spec-footer">
+            <span class="spec-price">$6,500</span>
+            <a href="https://wa.me/70145424?text=Hola%2C%20me%20interesa%20el%20Yamaha%20Raptor%20700R%20%F0%9F%9A%97" class="btn-consult" target="_blank" rel="noopener">
+              <i class="bi bi-whatsapp"></i> Consultar
+            </a>
           </div>
         </div>
       </article>
 
-      <!-- 7. Jeep Wrangler Azul -->
+      <!-- 7. Jeep Wrangler TJ -->
       <article class="car-card" data-status="disponible" data-name="jeep wrangler 2005">
-        <div class="car-swiper swiper">
-          <div class="swiper-wrapper">
-            <div class="swiper-slide"><img src="img/06-jeep-wrangler-azul/wrangler-azul-1.jpeg" alt="Jeep Wrangler"/></div>
-            <div class="swiper-slide"><img src="img/06-jeep-wrangler-azul/wrangler-azul-3.jpeg" alt="Jeep Wrangler"/></div>
-            <div class="swiper-slide"><img src="img/06-jeep-wrangler-azul/wrangler-azul-4.jpeg" alt="Jeep Wrangler"/></div>
-            <div class="swiper-slide"><img src="img/06-jeep-wrangler-azul/wrangler-azul-5.jpeg" alt="Jeep Wrangler"/></div>
-            <div class="swiper-slide"><img src="img/06-jeep-wrangler-azul/wrangler-azul-6.jpeg" alt="Jeep Wrangler"/></div>
-            <div class="swiper-slide"><img src="img/06-jeep-wrangler-azul/wrangler-azul-7.jpeg" alt="Jeep Wrangler"/></div>
-            <div class="swiper-slide"><img src="img/06-jeep-wrangler-azul/wrangler-azul-8.jpeg" alt="Jeep Wrangler"/></div>
+        <div class="card-image">
+          <div class="car-swiper swiper">
+            <div class="swiper-wrapper">
+              <div class="swiper-slide"><img src="img/06-jeep-wrangler-azul/wrangler-azul-1.jpeg" alt="Jeep Wrangler"/></div>
+              <div class="swiper-slide"><img src="img/06-jeep-wrangler-azul/wrangler-azul-3.jpeg" alt="Jeep Wrangler"/></div>
+              <div class="swiper-slide"><img src="img/06-jeep-wrangler-azul/wrangler-azul-4.jpeg" alt="Jeep Wrangler"/></div>
+              <div class="swiper-slide"><img src="img/06-jeep-wrangler-azul/wrangler-azul-5.jpeg" alt="Jeep Wrangler"/></div>
+              <div class="swiper-slide"><img src="img/06-jeep-wrangler-azul/wrangler-azul-6.jpeg" alt="Jeep Wrangler"/></div>
+              <div class="swiper-slide"><img src="img/06-jeep-wrangler-azul/wrangler-azul-7.jpeg" alt="Jeep Wrangler"/></div>
+              <div class="swiper-slide"><img src="img/06-jeep-wrangler-azul/wrangler-azul-8.jpeg" alt="Jeep Wrangler"/></div>
+            </div>
+            <div class="swiper-pagination"></div>
           </div>
-          <div class="swiper-pagination"></div>
-          <div class="swiper-button-prev"></div><div class="swiper-button-next"></div>
+          <span class="car-status disponible">DISPONIBLE</span>
         </div>
-        <span class="car-badge disponible"><i class="bi bi-check-circle-fill me-1"></i>Disponible</span>
-        <div class="car-info">
-          <div class="car-meta">
-            <span><i class="bi bi-calendar3"></i> 2005</span>
-            <span><i class="bi bi-speedometer"></i> 110,000 km</span>
-            <span><i class="bi bi-gear"></i> Manual</span>
-          </div>
-          <h3 class="car-name">Jeep Wrangler TJ</h3>
-          <p class="car-engine"><i class="bi bi-lightning-charge-fill me-1"></i>4.0L · 190 hp</p>
-          <div class="car-footer">
-            <span class="car-price">$18,000</span>
-            <a href="https://wa.me/70145424?text=Hola%2C%20me%20interesa%20el%20Jeep%20Wrangler%202005%20%F0%9F%9A%97" class="btn-whatsapp" target="_blank" rel="noopener"><i class="bi bi-whatsapp"></i> Consultar</a>
+        <div class="card-specs">
+          <p class="spec-tag">2005 · 110,000 km · Manual</p>
+          <h3 class="spec-name">Jeep Wrangler TJ</h3>
+          <p class="spec-engine"><i class="bi bi-lightning-charge-fill"></i>4.0L · 190 hp</p>
+          <div class="spec-divider"></div>
+          <div class="spec-footer">
+            <span class="spec-price">$18,000</span>
+            <a href="https://wa.me/70145424?text=Hola%2C%20me%20interesa%20el%20Jeep%20Wrangler%202005%20%F0%9F%9A%97" class="btn-consult" target="_blank" rel="noopener">
+              <i class="bi bi-whatsapp"></i> Consultar
+            </a>
           </div>
         </div>
       </article>
 
-      <!-- 8. Honda Civic Vintage -->
+      <!-- 8. Honda Civic EG -->
       <article class="car-card" data-status="reservado" data-name="honda civic 1997">
-        <div class="car-swiper swiper">
-          <div class="swiper-wrapper">
-            <div class="swiper-slide"><img src="img/07-honda-civic-azul-vintage/civic-plata-1.jpeg" alt="Honda Civic"/></div>
-            <div class="swiper-slide"><img src="img/07-honda-civic-azul-vintage/civic-vintage-1.jpeg" alt="Honda Civic"/></div>
-            <div class="swiper-slide"><img src="img/07-honda-civic-azul-vintage/civic-vintage-2.jpeg" alt="Honda Civic"/></div>
+        <div class="card-image">
+          <div class="car-swiper swiper">
+            <div class="swiper-wrapper">
+              <div class="swiper-slide"><img src="img/07-honda-civic-azul-vintage/civic-plata-1.jpeg" alt="Honda Civic EG"/></div>
+              <div class="swiper-slide"><img src="img/07-honda-civic-azul-vintage/civic-vintage-1.jpeg" alt="Honda Civic EG"/></div>
+              <div class="swiper-slide"><img src="img/07-honda-civic-azul-vintage/civic-vintage-2.jpeg" alt="Honda Civic EG"/></div>
+            </div>
+            <div class="swiper-pagination"></div>
           </div>
-          <div class="swiper-pagination"></div>
-          <div class="swiper-button-prev"></div><div class="swiper-button-next"></div>
+          <span class="car-status reservado">RESERVADO</span>
         </div>
-        <span class="car-badge reservado"><i class="bi bi-clock-fill me-1"></i>Reservado</span>
-        <div class="car-info">
-          <div class="car-meta">
-            <span><i class="bi bi-calendar3"></i> 1997</span>
-            <span><i class="bi bi-speedometer"></i> 160,000 km</span>
-            <span><i class="bi bi-gear"></i> Manual</span>
-          </div>
-          <h3 class="car-name">Honda Civic EG</h3>
-          <p class="car-engine"><i class="bi bi-lightning-charge-fill me-1"></i>1.6L · 125 hp</p>
-          <div class="car-footer">
-            <span class="car-price">$5,000</span>
-            <a href="https://wa.me/70145424?text=Hola%2C%20me%20interesa%20el%20Honda%20Civic%201997%20%F0%9F%9A%97" class="btn-whatsapp" target="_blank" rel="noopener"><i class="bi bi-whatsapp"></i> Consultar</a>
+        <div class="card-specs">
+          <p class="spec-tag">1997 · 160,000 km · Manual</p>
+          <h3 class="spec-name">Honda Civic EG</h3>
+          <p class="spec-engine"><i class="bi bi-lightning-charge-fill"></i>1.6L · 125 hp</p>
+          <div class="spec-divider"></div>
+          <div class="spec-footer">
+            <span class="spec-price">$5,000</span>
+            <a href="https://wa.me/70145424?text=Hola%2C%20me%20interesa%20el%20Honda%20Civic%201997%20%F0%9F%9A%97" class="btn-consult" target="_blank" rel="noopener">
+              <i class="bi bi-whatsapp"></i> Consultar
+            </a>
           </div>
         </div>
       </article>
 
-      <!-- 9. BMW Serie 3 Blanco -->
+      <!-- 9. BMW Serie 3 320i -->
       <article class="car-card" data-status="disponible" data-name="bmw serie 3 2014">
-        <div class="car-swiper swiper">
-          <div class="swiper-wrapper">
-            <div class="swiper-slide"><img src="img/08-bmw-serie3-blanco/bmw-s3-1.jpeg" alt="BMW Serie 3"/></div>
-            <div class="swiper-slide"><img src="img/08-bmw-serie3-blanco/bmw-s3-5.jpeg" alt="BMW Serie 3"/></div>
-            <div class="swiper-slide"><img src="img/08-bmw-serie3-blanco/bmw-s3-6.jpeg" alt="BMW Serie 3"/></div>
-            <div class="swiper-slide"><img src="img/08-bmw-serie3-blanco/bmw-s3-7.jpeg" alt="BMW Serie 3"/></div>
+        <div class="card-image">
+          <div class="car-swiper swiper">
+            <div class="swiper-wrapper">
+              <div class="swiper-slide"><img src="img/08-bmw-serie3-blanco/bmw-s3-1.jpeg" alt="BMW Serie 3"/></div>
+              <div class="swiper-slide"><img src="img/08-bmw-serie3-blanco/bmw-s3-5.jpeg" alt="BMW Serie 3"/></div>
+              <div class="swiper-slide"><img src="img/08-bmw-serie3-blanco/bmw-s3-6.jpeg" alt="BMW Serie 3"/></div>
+              <div class="swiper-slide"><img src="img/08-bmw-serie3-blanco/bmw-s3-7.jpeg" alt="BMW Serie 3"/></div>
+            </div>
+            <div class="swiper-pagination"></div>
           </div>
-          <div class="swiper-pagination"></div>
-          <div class="swiper-button-prev"></div><div class="swiper-button-next"></div>
+          <span class="car-status disponible">DISPONIBLE</span>
         </div>
-        <span class="car-badge disponible"><i class="bi bi-check-circle-fill me-1"></i>Disponible</span>
-        <div class="car-info">
-          <div class="car-meta">
-            <span><i class="bi bi-calendar3"></i> 2014</span>
-            <span><i class="bi bi-speedometer"></i> 62,000 km</span>
-            <span><i class="bi bi-gear"></i> Automático</span>
-          </div>
-          <h3 class="car-name">BMW Serie 3 320i</h3>
-          <p class="car-engine"><i class="bi bi-lightning-charge-fill me-1"></i>2.0L Turbo · 184 hp</p>
-          <div class="car-footer">
-            <span class="car-price">$24,000</span>
-            <a href="https://wa.me/70145424?text=Hola%2C%20me%20interesa%20el%20BMW%20Serie%203%202014%20%F0%9F%9A%97" class="btn-whatsapp" target="_blank" rel="noopener"><i class="bi bi-whatsapp"></i> Consultar</a>
+        <div class="card-specs">
+          <p class="spec-tag">2014 · 62,000 km · Automático</p>
+          <h3 class="spec-name">BMW Serie 3 320i</h3>
+          <p class="spec-engine"><i class="bi bi-lightning-charge-fill"></i>2.0L Turbo · 184 hp</p>
+          <div class="spec-divider"></div>
+          <div class="spec-footer">
+            <span class="spec-price">$24,000</span>
+            <a href="https://wa.me/70145424?text=Hola%2C%20me%20interesa%20el%20BMW%20Serie%203%202014%20%F0%9F%9A%97" class="btn-consult" target="_blank" rel="noopener">
+              <i class="bi bi-whatsapp"></i> Consultar
+            </a>
           </div>
         </div>
       </article>
 
-      <!-- 10. Honda Civic Blanco -->
+      <!-- 10. Honda Civic FD Blanco -->
       <article class="car-card" data-status="disponible" data-name="honda civic blanco 2008">
-        <div class="car-swiper swiper">
-          <div class="swiper-wrapper">
-            <div class="swiper-slide"><img src="img/09-honda-civic-blanco/civic-blanco-3.jpeg" alt="Honda Civic Blanco"/></div>
-            <div class="swiper-slide"><img src="img/09-honda-civic-blanco/civic-blanco-6.jpeg" alt="Honda Civic Blanco"/></div>
-            <div class="swiper-slide"><img src="img/09-honda-civic-blanco/civic-plata-3.jpeg" alt="Honda Civic Blanco"/></div>
+        <div class="card-image">
+          <div class="car-swiper swiper">
+            <div class="swiper-wrapper">
+              <div class="swiper-slide"><img src="img/09-honda-civic-blanco/civic-blanco-3.jpeg" alt="Honda Civic FD"/></div>
+              <div class="swiper-slide"><img src="img/09-honda-civic-blanco/civic-blanco-6.jpeg" alt="Honda Civic FD"/></div>
+              <div class="swiper-slide"><img src="img/09-honda-civic-blanco/civic-plata-3.jpeg" alt="Honda Civic FD"/></div>
+            </div>
+            <div class="swiper-pagination"></div>
           </div>
-          <div class="swiper-pagination"></div>
-          <div class="swiper-button-prev"></div><div class="swiper-button-next"></div>
+          <span class="car-status disponible">DISPONIBLE</span>
         </div>
-        <span class="car-badge disponible"><i class="bi bi-check-circle-fill me-1"></i>Disponible</span>
-        <div class="car-info">
-          <div class="car-meta">
-            <span><i class="bi bi-calendar3"></i> 2008</span>
-            <span><i class="bi bi-speedometer"></i> 88,000 km</span>
-            <span><i class="bi bi-gear"></i> Automático</span>
-          </div>
-          <h3 class="car-name">Honda Civic FD Blanco</h3>
-          <p class="car-engine"><i class="bi bi-lightning-charge-fill me-1"></i>1.8L · 140 hp</p>
-          <div class="car-footer">
-            <span class="car-price">$10,000</span>
-            <a href="https://wa.me/70145424?text=Hola%2C%20me%20interesa%20el%20Honda%20Civic%20FD%202008%20%F0%9F%9A%97" class="btn-whatsapp" target="_blank" rel="noopener"><i class="bi bi-whatsapp"></i> Consultar</a>
+        <div class="card-specs">
+          <p class="spec-tag">2008 · 88,000 km · Automático</p>
+          <h3 class="spec-name">Honda Civic FD Blanco</h3>
+          <p class="spec-engine"><i class="bi bi-lightning-charge-fill"></i>1.8L · 140 hp</p>
+          <div class="spec-divider"></div>
+          <div class="spec-footer">
+            <span class="spec-price">$10,000</span>
+            <a href="https://wa.me/70145424?text=Hola%2C%20me%20interesa%20el%20Honda%20Civic%20FD%202008%20%F0%9F%9A%97" class="btn-consult" target="_blank" rel="noopener">
+              <i class="bi bi-whatsapp"></i> Consultar
+            </a>
           </div>
         </div>
       </article>
 
-      <!-- 11. SUV Negro Levantado -->
+      <!-- 11. Grand Vitara Off-Road -->
       <article class="car-card" data-status="reservado" data-name="grand vitara negro 2006">
-        <div class="car-swiper swiper">
-          <div class="swiper-wrapper">
-            <div class="swiper-slide"><img src="img/11-suv-negro-levantado/suv-negro-1.jpeg" alt="Grand Vitara"/></div>
-            <div class="swiper-slide"><img src="img/11-suv-negro-levantado/suv-negro-2.jpeg" alt="Grand Vitara"/></div>
-            <div class="swiper-slide"><img src="img/11-suv-negro-levantado/corolla-blanco-3.jpeg" alt="Grand Vitara"/></div>
+        <div class="card-image">
+          <div class="car-swiper swiper">
+            <div class="swiper-wrapper">
+              <div class="swiper-slide"><img src="img/11-suv-negro-levantado/suv-negro-1.jpeg" alt="Grand Vitara"/></div>
+              <div class="swiper-slide"><img src="img/11-suv-negro-levantado/suv-negro-2.jpeg" alt="Grand Vitara"/></div>
+            </div>
+            <div class="swiper-pagination"></div>
           </div>
-          <div class="swiper-pagination"></div>
-          <div class="swiper-button-prev"></div><div class="swiper-button-next"></div>
+          <span class="car-status reservado">RESERVADO</span>
         </div>
-        <span class="car-badge reservado"><i class="bi bi-clock-fill me-1"></i>Reservado</span>
-        <div class="car-info">
-          <div class="car-meta">
-            <span><i class="bi bi-calendar3"></i> 2006</span>
-            <span><i class="bi bi-speedometer"></i> 130,000 km</span>
-            <span><i class="bi bi-gear"></i> Manual</span>
-          </div>
-          <h3 class="car-name">Grand Vitara Off-Road</h3>
-          <p class="car-engine"><i class="bi bi-lightning-charge-fill me-1"></i>2.0L · 128 hp</p>
-          <div class="car-footer">
-            <span class="car-price">$12,000</span>
-            <a href="https://wa.me/70145424?text=Hola%2C%20me%20interesa%20el%20Grand%20Vitara%202006%20%F0%9F%9A%97" class="btn-whatsapp" target="_blank" rel="noopener"><i class="bi bi-whatsapp"></i> Consultar</a>
+        <div class="card-specs">
+          <p class="spec-tag">2006 · 130,000 km · Manual</p>
+          <h3 class="spec-name">Grand Vitara Off-Road</h3>
+          <p class="spec-engine"><i class="bi bi-lightning-charge-fill"></i>2.0L · 128 hp</p>
+          <div class="spec-divider"></div>
+          <div class="spec-footer">
+            <span class="spec-price">$12,000</span>
+            <a href="https://wa.me/70145424?text=Hola%2C%20me%20interesa%20el%20Grand%20Vitara%202006%20%F0%9F%9A%97" class="btn-consult" target="_blank" rel="noopener">
+              <i class="bi bi-whatsapp"></i> Consultar
+            </a>
           </div>
         </div>
       </article>
 
-      <!-- 12. Honda Civic Plata -->
+      <!-- 12. Honda Civic Sedan -->
       <article class="car-card" data-status="disponible" data-name="honda civic plata 2007">
-        <div class="car-swiper swiper">
-          <div class="swiper-wrapper">
-            <div class="swiper-slide"><img src="img/12-honda-civic-plata/montero-azul-2.jpeg" alt="Honda Civic Plata"/></div>
-            <div class="swiper-slide"><img src="img/12-honda-civic-plata/montero-azul-3.jpeg" alt="Honda Civic Plata"/></div>
+        <div class="card-image">
+          <div class="car-swiper swiper">
+            <div class="swiper-wrapper">
+              <div class="swiper-slide"><img src="img/12-honda-civic-plata/montero-azul-2.jpeg" alt="Honda Civic Plata"/></div>
+              <div class="swiper-slide"><img src="img/12-honda-civic-plata/montero-azul-3.jpeg" alt="Honda Civic Plata"/></div>
+            </div>
+            <div class="swiper-pagination"></div>
           </div>
-          <div class="swiper-pagination"></div>
-          <div class="swiper-button-prev"></div><div class="swiper-button-next"></div>
+          <span class="car-status disponible">DISPONIBLE</span>
         </div>
-        <span class="car-badge disponible"><i class="bi bi-check-circle-fill me-1"></i>Disponible</span>
-        <div class="car-info">
-          <div class="car-meta">
-            <span><i class="bi bi-calendar3"></i> 2007</span>
-            <span><i class="bi bi-speedometer"></i> 90,000 km</span>
-            <span><i class="bi bi-gear"></i> Manual</span>
-          </div>
-          <h3 class="car-name">Honda Civic Sedan</h3>
-          <p class="car-engine"><i class="bi bi-lightning-charge-fill me-1"></i>1.8L · 140 hp</p>
-          <div class="car-footer">
-            <span class="car-price">$9,500</span>
-            <a href="https://wa.me/70145424?text=Hola%2C%20me%20interesa%20el%20Honda%20Civic%20Sedan%202007%20%F0%9F%9A%97" class="btn-whatsapp" target="_blank" rel="noopener"><i class="bi bi-whatsapp"></i> Consultar</a>
+        <div class="card-specs">
+          <p class="spec-tag">2007 · 90,000 km · Manual</p>
+          <h3 class="spec-name">Honda Civic Sedan</h3>
+          <p class="spec-engine"><i class="bi bi-lightning-charge-fill"></i>1.8L · 140 hp</p>
+          <div class="spec-divider"></div>
+          <div class="spec-footer">
+            <span class="spec-price">$9,500</span>
+            <a href="https://wa.me/70145424?text=Hola%2C%20me%20interesa%20el%20Honda%20Civic%20Sedan%202007%20%F0%9F%9A%97" class="btn-consult" target="_blank" rel="noopener">
+              <i class="bi bi-whatsapp"></i> Consultar
+            </a>
           </div>
         </div>
       </article>
 
-      <!-- 13. Toyota Land Cruiser Verde -->
+      <!-- 13. Toyota Land Cruiser 100 -->
       <article class="car-card" data-status="disponible" data-name="toyota land cruiser 2001">
-        <div class="car-swiper swiper">
-          <div class="swiper-wrapper">
-            <div class="swiper-slide"><img src="img/13-toyota-landcruiser-verde/landcruiser-1.jpeg" alt="Toyota Land Cruiser"/></div>
-            <div class="swiper-slide"><img src="img/13-toyota-landcruiser-verde/landcruiser-2.jpeg" alt="Toyota Land Cruiser"/></div>
-            <div class="swiper-slide"><img src="img/13-toyota-landcruiser-verde/jimny-gris-1.jpeg" alt="Toyota Land Cruiser"/></div>
+        <div class="card-image">
+          <div class="car-swiper swiper">
+            <div class="swiper-wrapper">
+              <div class="swiper-slide"><img src="img/13-toyota-landcruiser-verde/landcruiser-1.jpeg" alt="Toyota Land Cruiser"/></div>
+              <div class="swiper-slide"><img src="img/13-toyota-landcruiser-verde/landcruiser-2.jpeg" alt="Toyota Land Cruiser"/></div>
+            </div>
+            <div class="swiper-pagination"></div>
           </div>
-          <div class="swiper-pagination"></div>
-          <div class="swiper-button-prev"></div><div class="swiper-button-next"></div>
+          <span class="car-status disponible">DISPONIBLE</span>
         </div>
-        <span class="car-badge disponible"><i class="bi bi-check-circle-fill me-1"></i>Disponible</span>
-        <div class="car-info">
-          <div class="car-meta">
-            <span><i class="bi bi-calendar3"></i> 2001</span>
-            <span><i class="bi bi-speedometer"></i> 180,000 km</span>
-            <span><i class="bi bi-gear"></i> Automático</span>
-          </div>
-          <h3 class="car-name">Toyota Land Cruiser 100</h3>
-          <p class="car-engine"><i class="bi bi-lightning-charge-fill me-1"></i>4.5L · 230 hp</p>
-          <div class="car-footer">
-            <span class="car-price">$32,000</span>
-            <a href="https://wa.me/70145424?text=Hola%2C%20me%20interesa%20el%20Toyota%20Land%20Cruiser%202001%20%F0%9F%9A%97" class="btn-whatsapp" target="_blank" rel="noopener"><i class="bi bi-whatsapp"></i> Consultar</a>
+        <div class="card-specs">
+          <p class="spec-tag">2001 · 180,000 km · Automático</p>
+          <h3 class="spec-name">Toyota Land Cruiser 100</h3>
+          <p class="spec-engine"><i class="bi bi-lightning-charge-fill"></i>4.5L · 230 hp</p>
+          <div class="spec-divider"></div>
+          <div class="spec-footer">
+            <span class="spec-price">$32,000</span>
+            <a href="https://wa.me/70145424?text=Hola%2C%20me%20interesa%20el%20Toyota%20Land%20Cruiser%202001%20%F0%9F%9A%97" class="btn-consult" target="_blank" rel="noopener">
+              <i class="bi bi-whatsapp"></i> Consultar
+            </a>
           </div>
         </div>
       </article>
 
       <!-- 14. Suzuki Jimny Rojo -->
       <article class="car-card" data-status="disponible" data-name="suzuki jimny rojo 2006">
-        <div class="car-swiper swiper">
-          <div class="swiper-wrapper">
-            <div class="swiper-slide"><img src="img/15-suzuki-jimny-rojo/jimny-rojo-8.jpeg" alt="Suzuki Jimny Rojo"/></div>
-            <div class="swiper-slide"><img src="img/15-suzuki-jimny-rojo/jimny-rojo-9.jpeg" alt="Suzuki Jimny Rojo"/></div>
-            <div class="swiper-slide"><img src="img/15-suzuki-jimny-rojo/jimny-rojo-11.jpeg" alt="Suzuki Jimny Rojo"/></div>
+        <div class="card-image">
+          <div class="car-swiper swiper">
+            <div class="swiper-wrapper">
+              <div class="swiper-slide"><img src="img/15-suzuki-jimny-rojo/jimny-rojo-8.jpeg" alt="Suzuki Jimny Rojo"/></div>
+              <div class="swiper-slide"><img src="img/15-suzuki-jimny-rojo/jimny-rojo-9.jpeg" alt="Suzuki Jimny Rojo"/></div>
+              <div class="swiper-slide"><img src="img/15-suzuki-jimny-rojo/jimny-rojo-11.jpeg" alt="Suzuki Jimny Rojo"/></div>
+            </div>
+            <div class="swiper-pagination"></div>
           </div>
-          <div class="swiper-pagination"></div>
-          <div class="swiper-button-prev"></div><div class="swiper-button-next"></div>
+          <span class="car-status disponible">DISPONIBLE</span>
         </div>
-        <span class="car-badge disponible"><i class="bi bi-check-circle-fill me-1"></i>Disponible</span>
-        <div class="car-info">
-          <div class="car-meta">
-            <span><i class="bi bi-calendar3"></i> 2006</span>
-            <span><i class="bi bi-speedometer"></i> 98,000 km</span>
-            <span><i class="bi bi-gear"></i> Manual</span>
-          </div>
-          <h3 class="car-name">Suzuki Jimny Rojo</h3>
-          <p class="car-engine"><i class="bi bi-lightning-charge-fill me-1"></i>1.3L · 85 hp</p>
-          <div class="car-footer">
-            <span class="car-price">$14,500</span>
-            <a href="https://wa.me/70145424?text=Hola%2C%20me%20interesa%20el%20Suzuki%20Jimny%20Rojo%20%F0%9F%9A%97" class="btn-whatsapp" target="_blank" rel="noopener"><i class="bi bi-whatsapp"></i> Consultar</a>
+        <div class="card-specs">
+          <p class="spec-tag">2006 · 98,000 km · Manual</p>
+          <h3 class="spec-name">Suzuki Jimny Rojo</h3>
+          <p class="spec-engine"><i class="bi bi-lightning-charge-fill"></i>1.3L · 85 hp</p>
+          <div class="spec-divider"></div>
+          <div class="spec-footer">
+            <span class="spec-price">$14,500</span>
+            <a href="https://wa.me/70145424?text=Hola%2C%20me%20interesa%20el%20Suzuki%20Jimny%20Rojo%20%F0%9F%9A%97" class="btn-consult" target="_blank" rel="noopener">
+              <i class="bi bi-whatsapp"></i> Consultar
+            </a>
           </div>
         </div>
       </article>
 
-      <!-- 15. Isuzu D-Max Blanco -->
+      <!-- 15. Isuzu D-Max -->
       <article class="car-card" data-status="disponible" data-name="isuzu dmax blanco 2019">
-        <div class="car-swiper swiper">
-          <div class="swiper-wrapper">
-            <div class="swiper-slide"><img src="img/16-isuzu-dmax-blanco/corolla-blanco-1.jpeg" alt="Isuzu D-Max"/></div>
-            <div class="swiper-slide"><img src="img/16-isuzu-dmax-blanco/jimny-rojo-7.jpeg" alt="Isuzu D-Max"/></div>
-            <div class="swiper-slide"><img src="img/16-isuzu-dmax-blanco/landcruiser-3.jpeg" alt="Isuzu D-Max"/></div>
+        <div class="card-image">
+          <div class="car-swiper swiper">
+            <div class="swiper-wrapper">
+              <div class="swiper-slide"><img src="img/16-isuzu-dmax-blanco/corolla-blanco-1.jpeg" alt="Isuzu D-Max"/></div>
+              <div class="swiper-slide"><img src="img/16-isuzu-dmax-blanco/jimny-rojo-7.jpeg" alt="Isuzu D-Max"/></div>
+              <div class="swiper-slide"><img src="img/16-isuzu-dmax-blanco/landcruiser-3.jpeg" alt="Isuzu D-Max"/></div>
+            </div>
+            <div class="swiper-pagination"></div>
           </div>
-          <div class="swiper-pagination"></div>
-          <div class="swiper-button-prev"></div><div class="swiper-button-next"></div>
+          <span class="car-status disponible">DISPONIBLE</span>
         </div>
-        <span class="car-badge disponible"><i class="bi bi-check-circle-fill me-1"></i>Disponible</span>
-        <div class="car-info">
-          <div class="car-meta">
-            <span><i class="bi bi-calendar3"></i> 2019</span>
-            <span><i class="bi bi-speedometer"></i> 45,000 km</span>
-            <span><i class="bi bi-gear"></i> Manual</span>
-          </div>
-          <h3 class="car-name">Isuzu D-Max</h3>
-          <p class="car-engine"><i class="bi bi-lightning-charge-fill me-1"></i>1.9L TD · 163 hp</p>
-          <div class="car-footer">
-            <span class="car-price">$22,000</span>
-            <a href="https://wa.me/70145424?text=Hola%2C%20me%20interesa%20el%20Isuzu%20D-Max%20%F0%9F%9A%97" class="btn-whatsapp" target="_blank" rel="noopener"><i class="bi bi-whatsapp"></i> Consultar</a>
+        <div class="card-specs">
+          <p class="spec-tag">2019 · 45,000 km · Manual</p>
+          <h3 class="spec-name">Isuzu D-Max</h3>
+          <p class="spec-engine"><i class="bi bi-lightning-charge-fill"></i>1.9L TD · 163 hp</p>
+          <div class="spec-divider"></div>
+          <div class="spec-footer">
+            <span class="spec-price">$22,000</span>
+            <a href="https://wa.me/70145424?text=Hola%2C%20me%20interesa%20el%20Isuzu%20D-Max%20%F0%9F%9A%97" class="btn-consult" target="_blank" rel="noopener">
+              <i class="bi bi-whatsapp"></i> Consultar
+            </a>
           </div>
         </div>
       </article>
 
-      <!-- 16. Mitsubishi Montero Azul -->
+      <!-- 16. Mitsubishi Montero Sport -->
       <article class="car-card" data-status="disponible" data-name="mitsubishi montero sport 2004">
-        <div class="car-swiper swiper">
-          <div class="swiper-wrapper">
-            <div class="swiper-slide"><img src="img/17-mitsubishi-montero-azul/montero-azul-1.jpeg" alt="Mitsubishi Montero"/></div>
-            <div class="swiper-slide"><img src="img/17-mitsubishi-montero-azul/dmax-blanco-10.jpeg" alt="Mitsubishi Montero"/></div>
-            <div class="swiper-slide"><img src="img/17-mitsubishi-montero-azul/jimny-rojo-6.jpeg" alt="Mitsubishi Montero"/></div>
+        <div class="card-image">
+          <div class="car-swiper swiper">
+            <div class="swiper-wrapper">
+              <div class="swiper-slide"><img src="img/17-mitsubishi-montero-azul/montero-azul-1.jpeg" alt="Mitsubishi Montero"/></div>
+              <div class="swiper-slide"><img src="img/17-mitsubishi-montero-azul/dmax-blanco-10.jpeg" alt="Mitsubishi Montero"/></div>
+              <div class="swiper-slide"><img src="img/17-mitsubishi-montero-azul/jimny-rojo-6.jpeg" alt="Mitsubishi Montero"/></div>
+            </div>
+            <div class="swiper-pagination"></div>
           </div>
-          <div class="swiper-pagination"></div>
-          <div class="swiper-button-prev"></div><div class="swiper-button-next"></div>
+          <span class="car-status disponible">DISPONIBLE</span>
         </div>
-        <span class="car-badge disponible"><i class="bi bi-check-circle-fill me-1"></i>Disponible</span>
-        <div class="car-info">
-          <div class="car-meta">
-            <span><i class="bi bi-calendar3"></i> 2004</span>
-            <span><i class="bi bi-speedometer"></i> 145,000 km</span>
-            <span><i class="bi bi-gear"></i> Automático</span>
-          </div>
-          <h3 class="car-name">Mitsubishi Montero Sport</h3>
-          <p class="car-engine"><i class="bi bi-lightning-charge-fill me-1"></i>3.5L V6 · 200 hp</p>
-          <div class="car-footer">
-            <span class="car-price">$16,000</span>
-            <a href="https://wa.me/70145424?text=Hola%2C%20me%20interesa%20el%20Mitsubishi%20Montero%20Sport%202004%20%F0%9F%9A%97" class="btn-whatsapp" target="_blank" rel="noopener"><i class="bi bi-whatsapp"></i> Consultar</a>
+        <div class="card-specs">
+          <p class="spec-tag">2004 · 145,000 km · Automático</p>
+          <h3 class="spec-name">Mitsubishi Montero Sport</h3>
+          <p class="spec-engine"><i class="bi bi-lightning-charge-fill"></i>3.5L V6 · 200 hp</p>
+          <div class="spec-divider"></div>
+          <div class="spec-footer">
+            <span class="spec-price">$16,000</span>
+            <a href="https://wa.me/70145424?text=Hola%2C%20me%20interesa%20el%20Mitsubishi%20Montero%20Sport%202004%20%F0%9F%9A%97" class="btn-consult" target="_blank" rel="noopener">
+              <i class="bi bi-whatsapp"></i> Consultar
+            </a>
           </div>
         </div>
       </article>
 
       <!-- 17. Suzuki Jimny Gris -->
       <article class="car-card" data-status="disponible" data-name="suzuki jimny gris">
-        <div class="car-swiper swiper">
-          <div class="swiper-wrapper">
-            <div class="swiper-slide"><img src="img/suzuki-jimny-gris/jimny-gris-2.jpeg" alt="Suzuki Jimny Gris"/></div>
-            <div class="swiper-slide"><img src="img/suzuki-jimny-gris/jimny-gris-3.jpeg" alt="Suzuki Jimny Gris"/></div>
-            <div class="swiper-slide"><img src="img/suzuki-jimny-gris/jimny-gris-4.jpeg" alt="Suzuki Jimny Gris"/></div>
+        <div class="card-image">
+          <div class="car-swiper swiper">
+            <div class="swiper-wrapper">
+              <div class="swiper-slide"><img src="img/suzuki-jimny-gris/jimny-gris-2.jpeg" alt="Suzuki Jimny Gris"/></div>
+              <div class="swiper-slide"><img src="img/suzuki-jimny-gris/jimny-gris-3.jpeg" alt="Suzuki Jimny Gris"/></div>
+              <div class="swiper-slide"><img src="img/suzuki-jimny-gris/jimny-gris-4.jpeg" alt="Suzuki Jimny Gris"/></div>
+            </div>
+            <div class="swiper-pagination"></div>
           </div>
-          <div class="swiper-pagination"></div>
-          <div class="swiper-button-prev"></div><div class="swiper-button-next"></div>
+          <span class="car-status disponible">DISPONIBLE</span>
         </div>
-        <span class="car-badge disponible"><i class="bi bi-check-circle-fill me-1"></i>Disponible</span>
-        <div class="car-info">
-          <div class="car-meta">
-            <span><i class="bi bi-calendar3"></i> 2005</span>
-            <span><i class="bi bi-speedometer"></i> 105,000 km</span>
-            <span><i class="bi bi-gear"></i> Manual</span>
-          </div>
-          <h3 class="car-name">Suzuki Jimny Gris</h3>
-          <p class="car-engine"><i class="bi bi-lightning-charge-fill me-1"></i>1.3L · 85 hp</p>
-          <div class="car-footer">
-            <span class="car-price">$13,000</span>
-            <a href="https://wa.me/70145424?text=Hola%2C%20me%20interesa%20el%20Suzuki%20Jimny%20Gris%20%F0%9F%9A%97" class="btn-whatsapp" target="_blank" rel="noopener"><i class="bi bi-whatsapp"></i> Consultar</a>
-          </div>
-        </div>
-      </article>
-
-      <!-- 18. Toyota Corolla Blanco -->
-      <article class="car-card" data-status="disponible" data-name="toyota corolla blanco">
-        <div class="car-swiper swiper">
-          <div class="swiper-wrapper">
-            <div class="swiper-slide"><img src="img/toyota-corolla-blanco/civic-blanco-4.jpeg" alt="Toyota Corolla"/></div>
-            <div class="swiper-slide"><img src="img/toyota-corolla-blanco/civic-blanco-5.jpeg" alt="Toyota Corolla"/></div>
-            <div class="swiper-slide"><img src="img/toyota-corolla-blanco/dmax-blanco-4.jpeg" alt="Toyota Corolla"/></div>
-          </div>
-          <div class="swiper-pagination"></div>
-          <div class="swiper-button-prev"></div><div class="swiper-button-next"></div>
-        </div>
-        <span class="car-badge disponible"><i class="bi bi-check-circle-fill me-1"></i>Disponible</span>
-        <div class="car-info">
-          <div class="car-meta">
-            <span><i class="bi bi-calendar3"></i> 2015</span>
-            <span><i class="bi bi-speedometer"></i> 78,000 km</span>
-            <span><i class="bi bi-gear"></i> Automático</span>
-          </div>
-          <h3 class="car-name">Toyota Corolla Blanco</h3>
-          <p class="car-engine"><i class="bi bi-lightning-charge-fill me-1"></i>1.8L · 132 hp</p>
-          <div class="car-footer">
-            <span class="car-price">$16,500</span>
-            <a href="https://wa.me/70145424?text=Hola%2C%20me%20interesa%20el%20Toyota%20Corolla%20Blanco%20%F0%9F%9A%97" class="btn-whatsapp" target="_blank" rel="noopener"><i class="bi bi-whatsapp"></i> Consultar</a>
+        <div class="card-specs">
+          <p class="spec-tag">2005 · 105,000 km · Manual</p>
+          <h3 class="spec-name">Suzuki Jimny Gris</h3>
+          <p class="spec-engine"><i class="bi bi-lightning-charge-fill"></i>1.3L · 85 hp</p>
+          <div class="spec-divider"></div>
+          <div class="spec-footer">
+            <span class="spec-price">$13,000</span>
+            <a href="https://wa.me/70145424?text=Hola%2C%20me%20interesa%20el%20Suzuki%20Jimny%20Gris%20%F0%9F%9A%97" class="btn-consult" target="_blank" rel="noopener">
+              <i class="bi bi-whatsapp"></i> Consultar
+            </a>
           </div>
         </div>
       </article>
 
-      <!-- 19. Volkswagen Jetta Blanco -->
-      <article class="car-card" data-status="disponible" data-name="volkswagen jetta blanco">
-        <div class="car-swiper swiper">
-          <div class="swiper-wrapper">
-            <div class="swiper-slide"><img src="img/vw-jetta-blanco/jetta-blanco-1.jpeg" alt="Volkswagen Jetta"/></div>
-            <div class="swiper-slide"><img src="img/vw-jetta-blanco/jetta-blanco-2.jpeg" alt="Volkswagen Jetta"/></div>
-            <div class="swiper-slide"><img src="img/vw-jetta-blanco/corolla-blanco-2.jpeg" alt="Volkswagen Jetta"/></div>
-          </div>
-          <div class="swiper-pagination"></div>
-          <div class="swiper-button-prev"></div><div class="swiper-button-next"></div>
-        </div>
-        <span class="car-badge disponible"><i class="bi bi-check-circle-fill me-1"></i>Disponible</span>
-        <div class="car-info">
-          <div class="car-meta">
-            <span><i class="bi bi-calendar3"></i> 2016</span>
-            <span><i class="bi bi-speedometer"></i> 68,000 km</span>
-            <span><i class="bi bi-gear"></i> Automático</span>
-          </div>
-          <h3 class="car-name">Volkswagen Jetta Blanco</h3>
-          <p class="car-engine"><i class="bi bi-lightning-charge-fill me-1"></i>2.0L · 115 hp</p>
-          <div class="car-footer">
-            <span class="car-price">$14,000</span>
-            <a href="https://wa.me/70145424?text=Hola%2C%20me%20interesa%20el%20Volkswagen%20Jetta%20Blanco%20%F0%9F%9A%97" class="btn-whatsapp" target="_blank" rel="noopener"><i class="bi bi-whatsapp"></i> Consultar</a>
-          </div>
-        </div>
-      </article>
+      <!-- Sin resultados -->
+      <p class="no-results" id="noResults" style="display:none;">
+        SIN RESULTADOS PARA LA BÚSQUEDA.
+      </p>
 
     </div><!-- /cars-grid -->
-
-    <!-- Sin resultados -->
-    <div class="no-results d-none" id="noResults">
-      <i class="bi bi-search fs-1 opacity-50"></i>
-      <p>No se encontraron autos con ese criterio.</p>
-    </div>
-
   </div>
 </section>
 
 
-<!-- ═══════════════════════════════════════════════
-     POR QUÉ NOSOTROS
-═══════════════════════════════════════════════ -->
-<section class="section-features" id="porque">
-  <div class="container">
-
-    <div class="section-header text-center mb-5" data-reveal>
-      <p class="section-eyebrow">La diferencia Ramírez</p>
-      <h2 class="section-title">Por qué <span class="accent-text">elegirnos</span></h2>
+<!-- ══════════════════════════════════════════════════
+     GALERÍA / LOOKBOOK
+══════════════════════════════════════════════════ -->
+<section class="section-gallery" id="galeria">
+  <div class="gallery-container">
+    <div class="section-header" data-reveal>
+      <p class="section-tag">// LOOKBOOK</p>
+      <h2 class="section-title">En <em>Acción</em></h2>
     </div>
+    <div class="gallery-grid">
+      <div class="gallery-item gi-tall">
+        <img src="img/06-jeep-wrangler-azul/wrangler-azul-1.jpeg" alt="Jeep Wrangler"/>
+        <div class="gallery-overlay"><span>Jeep Wrangler TJ</span></div>
+      </div>
+      <div class="gallery-item gi-wide">
+        <img src="img/05-yamaha-raptor-azul/raptor-azul-1.jpeg" alt="Yamaha Raptor"/>
+        <div class="gallery-overlay"><span>Yamaha Raptor 700R</span></div>
+      </div>
+      <div class="gallery-item">
+        <img src="img/11-suv-negro-levantado/suv-negro-1.jpeg" alt="Grand Vitara"/>
+        <div class="gallery-overlay"><span>Grand Vitara Off-Road</span></div>
+      </div>
+      <div class="gallery-item">
+        <img src="img/06-jeep-wrangler-azul/wrangler-azul-4.jpeg" alt="Detalle Wrangler"/>
+        <div class="gallery-overlay"><span>Detalle · Wrangler</span></div>
+      </div>
+      <div class="gallery-item gi-wide">
+        <img src="img/13-toyota-landcruiser-verde/landcruiser-1.jpeg" alt="Land Cruiser"/>
+        <div class="gallery-overlay"><span>Toyota Land Cruiser 100</span></div>
+      </div>
+      <div class="gallery-item">
+        <img src="img/15-suzuki-jimny-rojo/jimny-rojo-8.jpeg" alt="Jimny Rojo"/>
+        <div class="gallery-overlay"><span>Suzuki Jimny Rojo</span></div>
+      </div>
+    </div>
+  </div>
+</section>
 
+
+<!-- ══════════════════════════════════════════════════
+     POR QUÉ NOSOTROS
+══════════════════════════════════════════════════ -->
+<section class="section-features" id="porque">
+  <div class="features-container">
+    <div class="section-header" data-reveal>
+      <p class="section-tag">// POR QUÉ NOSOTROS</p>
+      <h2 class="section-title">Nuestro <em>Compromiso</em></h2>
+      <p class="section-sub">Más que un showroom — una promesa de calidad.</p>
+    </div>
     <div class="features-grid">
-      <div class="feature-card" data-reveal data-delay="0">
+      <div class="feature-card" data-reveal>
         <div class="feature-icon"><i class="bi bi-shield-check"></i></div>
         <h4>Vehículos Verificados</h4>
-        <p>Cada auto pasa por una revisión técnica de 120 puntos antes de ser publicado.</p>
+        <p>Cada auto pasa por una revisión técnica exhaustiva antes de estar en nuestro catálogo.</p>
       </div>
       <div class="feature-card" data-reveal data-delay="100">
-        <div class="feature-icon"><i class="bi bi-cash-coin"></i></div>
+        <div class="feature-icon"><i class="bi bi-credit-card-2-front"></i></div>
         <h4>Financiamiento Flexible</h4>
-        <p>Te asesoramos con opciones de crédito adaptadas a tu presupuesto.</p>
+        <p>Opciones de pago adaptadas a tu realidad. Te ayudamos a encontrar el plan ideal.</p>
       </div>
       <div class="feature-card" data-reveal data-delay="200">
-        <div class="feature-icon"><i class="bi bi-truck"></i></div>
+        <div class="feature-icon"><i class="bi bi-headset"></i></div>
+        <h4>Atención Personalizada</h4>
+        <p>Nuestro equipo te acompaña desde el primer mensaje hasta que tienes las llaves en mano.</p>
+      </div>
+      <div class="feature-card" data-reveal data-delay="300">
+        <div class="feature-icon"><i class="bi bi-file-earmark-check"></i></div>
+        <h4>Documentación Limpia</h4>
+        <p>Papeles al día, sin sorpresas. Transparencia total en cada transacción.</p>
+      </div>
+      <div class="feature-card" data-reveal data-delay="400">
+        <div class="feature-icon"><i class="bi bi-geo-alt"></i></div>
         <h4>Entrega a Domicilio</h4>
-        <p>Coordinamos la entrega donde estés. Sin complicaciones, sin filas.</p>
+        <p>Coordinamos la entrega donde tú estés. Comodidad sin igual.</p>
+      </div>
+      <div class="feature-card" data-reveal data-delay="500">
+        <div class="feature-icon"><i class="bi bi-stars"></i></div>
+        <h4>Garantía de Satisfacción</h4>
+        <p>Si no quedas satisfecho en los primeros días, lo resolvemos. Así de simple.</p>
       </div>
     </div>
-
   </div>
 </section>
 
 
-<!-- ═══════════════════════════════════════════════
-     FOOTER / CONTACTO
-═══════════════════════════════════════════════ -->
+<!-- ══════════════════════════════════════════════════
+     TESTIMONIOS
+══════════════════════════════════════════════════ -->
+<section class="section-testimonials" id="testimonios">
+  <div class="testi-container">
+    <div class="section-header" data-reveal>
+      <p class="section-tag">// CLIENTES</p>
+      <h2 class="section-title">Lo que <em>Dicen</em></h2>
+    </div>
+    <div class="testi-grid">
+      <div class="testi-card" data-reveal>
+        <span class="testi-quote">"</span>
+        <p class="testi-text">Compré mi Jeep Wrangler aquí y fue la mejor decisión. El proceso fue rápido, transparente y sin presiones. El auto estaba en perfectas condiciones.</p>
+        <div class="testi-author">
+          <span class="testi-name">Carlos M.</span>
+          <span class="testi-model">JEEP WRANGLER TJ · 2005</span>
+        </div>
+      </div>
+      <div class="testi-card" data-reveal data-delay="100">
+        <span class="testi-quote">"</span>
+        <p class="testi-text">Excelente atención desde el primer mensaje. Me ayudaron a encontrar el Toyota RAV4 perfecto para mi familia dentro de mi presupuesto. 100% recomendado.</p>
+        <div class="testi-author">
+          <span class="testi-name">Ana R.</span>
+          <span class="testi-model">TOYOTA RAV4 · 2010</span>
+        </div>
+      </div>
+      <div class="testi-card" data-reveal data-delay="200">
+        <span class="testi-quote">"</span>
+        <p class="testi-text">No esperaba encontrar un Land Cruiser en tan buen estado a ese precio. Los documentos estaban perfectos. Volveré sin duda cuando busque mi próximo auto.</p>
+        <div class="testi-author">
+          <span class="testi-name">Roberto V.</span>
+          <span class="testi-model">TOYOTA LAND CRUISER 100 · 2001</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════
+     FOOTER
+══════════════════════════════════════════════════ -->
 <footer class="site-footer" id="contacto">
-  <div class="container">
-    <div class="footer-top">
-      <div class="footer-brand">
-        <span class="brand-icon"><i class="bi bi-speedometer2"></i></span>
-        <span class="brand-text">Ramírez <em>Ignition</em></span>
-      </div>
-      <p class="footer-tagline">Autos de carácter. Servicio de primer nivel.</p>
-      <div class="footer-socials">
-        <a href="#" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
-        <a href="#" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
-        <a href="https://wa.me/70145424" target="_blank" rel="noopener" aria-label="WhatsApp">
-          <i class="bi bi-whatsapp"></i>
-        </a>
+  <div class="footer-container">
+    <div class="footer-brand">
+      <span class="brand-sigil">RI</span>
+      <div>
+        <p class="footer-name">Ramírez Ignition</p>
+        <p class="footer-tag">LUXURY AUTOMOTIVE · EL SALVADOR</p>
       </div>
     </div>
-    <div class="footer-bottom">
-      <p>&copy; 2024 Ramírez Ignition. Todos los derechos reservados.</p>
+    <div class="footer-links">
+      <a href="#coleccion">Colección</a>
+      <a href="#galeria">Galería</a>
+      <a href="#porque">Nosotros</a>
+      <a href="#testimonios">Clientes</a>
+      <a href="experiencia3d.html">Exp. 3D</a>
     </div>
+    <div class="footer-socials">
+      <a href="#" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+      <a href="#" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+      <a href="https://wa.me/70145424" aria-label="WhatsApp" target="_blank" rel="noopener"><i class="bi bi-whatsapp"></i></a>
+    </div>
+    <p class="footer-copy">© 2026 Ramírez Ignition. Todos los derechos reservados.</p>
   </div>
 </footer>
 
+
 <!-- WhatsApp FAB -->
-<a href="https://wa.me/70145424?text=Hola%2C%20vi%20tu%20p%C3%A1gina%20y%20me%20interesa%20un%20auto%20%F0%9F%9A%97"
-   class="whatsapp-fab" target="_blank" rel="noopener" aria-label="WhatsApp">
+<a href="https://wa.me/70145424?text=Hola%2C%20me%20interesa%20un%20veh%C3%ADculo%20de%20tu%20showroom%20%F0%9F%9A%97"
+   class="whatsapp-fab" target="_blank" rel="noopener" aria-label="Contactar por WhatsApp">
   <i class="bi bi-whatsapp"></i>
   <span class="fab-pulse"></span>
 </a>
 
 
-<!-- ═══════════════════════════════════════════════
-     SCRIPTS
-═══════════════════════════════════════════════ -->
-<!-- Bootstrap -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-<!-- Swiper -->
-<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-<!-- GSAP + ScrollTrigger -->
+<!-- ── Scripts ── -->
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
-<!-- Lenis smooth scroll -->
-<script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/bundled/lenis.min.js"></script>
-<!-- App -->
+<script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script src="PRINCIPAL.JS"></script>
 </body>
 </html>
